@@ -36,9 +36,9 @@ R62S3 <- function(R6Class, envir = .GlobalEnv){
     x = FALSE
     generic = FALSE
     if(!is.null(getter)){
-      x = suppressAll(try(methods(getter),silent=T))
+      x = suppressWarnings(suppressMessages((try(methods(getter),silent=T))))
       if(class(x)!="try-error"){
-        x = suppressAll(methods(getter))
+        x = suppressWarnings(suppressMessages(methods(getter)))
         if(length(x) > 0)
           generic = TRUE
       }
