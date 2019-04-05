@@ -1,32 +1,29 @@
-#-------------------------------------------------------------------------------
-#
-# Helper function to automatially generate S3 methods from a defined
-#   R6 class. Where required, S3 generics are defined.
-#
-# author: raphael.sonabend.15@ucl.ac.uk
-#
-#-------------------------------------------------------------------------------
+#' S3 Method Generator from R6 Class
+#'
+#' @description Auto-generates S3 generics and public methods from an R6 Class.
+#' @param R6Class The R6ClassGenerator or Classname to generate public methods from
+#' @param envir The enviornment to assign the methods to. Global environment by default.
+#' @usage R62S3(R6Class, envir)
+#' @return Assigns methods and generics to the chosen environment.
+#' @details The input must either be of class R6ClassGenerator or a character
+#'   string naming the R6ClassGenerator. Also assumes the classname is the same
+#'   as the R6ClassGenerator name.
+#' @examples
+#' printMachine <- R6::R6Class("printMachine",
+#'public = list(initialize = function() {},
+#'printer = function(str) {print(str)}))
+#' pm <- printMachine$new()
+#' R62S3("printMachine")
+#' R62S3(printMachine)
+#' pm$printer("Test String A")
+#' printer(pm, "Test String B")
+#'
+#' @export
 R62S3 <- function(R6Class, envir = .GlobalEnv){
-  #' S3 Method Generator from R6 Class
-  #'
-  #' @description Auto-generates S3 generics and public methods from an R6 Class.
-  #' @param R6Class The R6ClassGenerator or Classname to generate public methods from
-  #' @param envir The enviornment to assign the methods to. Global environment by default.
-  #' @usage R62S3(R6Class)
-  #' @return Assigns methods and generics to the chosen environment.
-  #' @details The input must either be of class R6ClassGenerator or a character
-  #' string naming the R6ClassGenerator. Also assumes the classname is the same
-  #' as the R6ClassGenerator name.
-  #' @examples
-  #' Queue <- R6Class(...)
-  #' q <- Queue$new(5,6,"foo")
-  #' R62S3("Queue")
-  #' R62S3(Queue)
-
-  assert(inherits(R6Class,"character"),inherits(R6Class,"R6ClassGenerator"),
+  checkmate::assert(inherits(R6Class,"character"),inherits(R6Class,"R6ClassGenerator"),
          .var.name = "R6Class must either be an R6ClassGenerator or a
          character string naming a generator.")
-  if(testCharacter(R6Class))
+  if(checkmate::testCharacter(R6Class))
     obj = get0(R6Class, envir = .GlobalEnv)
   else
     obj = R6Class
