@@ -7,3 +7,5 @@ Install with
 ````R
 devtools::install_github("RaphaelS1/R62S3")
 ````
+
+Acknowledgements: Dr Franz Kiraly, Prof. Dr. Peter Ruckdeschel
