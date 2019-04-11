@@ -4,14 +4,14 @@
 \alias{R62S3}
 \title{S3 Method Generator from R6 Class}
 \usage{
-R62S3(R6Class, getEnvir, assignPos)
+R62S3(R6Class, getEnvir, assignEnvir)
 }
 \arguments{
 \item{R6Class}{The R6ClassGenerator or Classname to generate public methods from}
 
 \item{getEnvir}{which environment to look in to get the R6 class, default Global Environment}
 
-\item{assignPos}{the position or character name of the environment in which to assign the S3 generics/methods, default Global Environment}
+\item{assignEnvir}{the environment in which to assign the S3 generics/methods, default Global Environment}
 }
 \value{
 Assigns methods and generics to the chosen environment.

@@ -3,8 +3,8 @@
 #' @description Auto-generates S3 generics and public methods from an R6 Class.
 #' @param R6Class The R6ClassGenerator or Classname to generate public methods from
 #' @param getEnvir which environment to look in to get the R6 class, default Global Environment
-#' @param assignPos the position or character name of the environment in which to assign the S3 generics/methods, default Global Environment
-#' @usage R62S3(R6Class, getEnvir, assignPos)
+#' @param assignEnvir the environment in which to assign the S3 generics/methods, default Global Environment
+#' @usage R62S3(R6Class, getEnvir, assignEnvir)
 #' @return Assigns methods and generics to the chosen environment.
 #' @details The input must either be of class R6ClassGenerator or a character
 #'   string naming the R6ClassGenerator. Also assumes the classname is the same
@@ -20,7 +20,7 @@
 #' printer(pm, "Test String B")
 #'
 #' @export
-R62S3 <- function(R6Class, getEnvir = .GlobalEnv, assignPos = ".GlobalEnv"){
+R62S3 <- function(R6Class, getEnvir = .GlobalEnv, assignEnvir = .GlobalEnv){
   checkmate::assert(inherits(R6Class,"character"),inherits(R6Class,"R6ClassGenerator"),
          .var.name = "R6Class must either be an R6ClassGenerator or a
          character string naming a generator.")
@@ -46,7 +46,7 @@ R62S3 <- function(R6Class, getEnvir = .GlobalEnv, assignPos = ".GlobalEnv"){
         y = as.character(sys.call()[[1]])
         UseMethod(y, x)
       }
-      assign(paste0(names(methods)[[i]]), value, pos = assignPos)
+      assign(paste0(names(methods)[[i]]), value, envir = assignEnvir)
     }
     method = paste(names(methods)[[i]],obj$classname,sep=".")
     value = function(x, ...){
@@ -56,6 +56,6 @@ R62S3 <- function(R6Class, getEnvir = .GlobalEnv, assignPos = ".GlobalEnv"){
       funCall = x[[method]]
       do.call(funCall, args)
     }
-    assign(paste0(method), value, pos = assignPos)
+    assign(paste0(method), value, envir = assignEnvir)
   }
 }
