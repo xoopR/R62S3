@@ -30,7 +30,8 @@ R62S3 <- function(R6Class, getEnvir = .GlobalEnv, assignEnvir = .GlobalEnv){
     obj = R6Class
   methods = obj$public_methods[!(names(obj$public_methods) %in% c("initialize","clone"))]
   for(i in 1:length(methods)){
-    getter = get0(names(methods)[[i]], envir = getEnvir)
+    methodname = names(methods)[[i]]
+    getter = get0(methodname, envir = getEnvir)
     x = FALSE
     generic = FALSE
     if(!is.null(getter)){
@@ -42,20 +43,19 @@ R62S3 <- function(R6Class, getEnvir = .GlobalEnv, assignEnvir = .GlobalEnv){
       }
     }
     if(!generic){
-      value = function(x,...){
-        y = as.character(sys.call()[[1]])
+      value = function(x,...){}
+      body(value) = substitute({
         UseMethod(y, x)
-      }
-      assign(paste0(names(methods)[[i]]), value, envir = assignEnvir)
+      },list(y=methodname))
+      assign(methodname, value, envir = assignEnvir)
     }
-    method = paste(names(methods)[[i]],obj$classname,sep=".")
-    value = function(x, ...){
+    method = paste(methodname,obj$classname,sep=".")
+    pos = gregexpr(".",method,fixed=T)[[1]]
+    value = function(x, ...){}
+    body(value) = substitute({
       args = list(...)
-      pos = gregexpr(".",sys.call()[[1]],fixed=T)[[1]]
-      method = substr(sys.call()[[1]],1,pos[length(pos)]-1)
-      funCall = x[[method]]
-      do.call(funCall, args)
-    }
+      do.call(x[[method]], args)
+    },list(method=methodname))
     assign(paste0(method), value, envir = assignEnvir)
   }
 }
