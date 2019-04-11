@@ -2,8 +2,9 @@
 #'
 #' @description Auto-generates S3 generics and public methods from an R6 Class.
 #' @param R6Class The R6ClassGenerator or Classname to generate public methods from
-#' @param envir The enviornment to assign the methods to. Global environment by default.
-#' @usage R62S3(R6Class, envir)
+#' @param getEnvir which environment to look in to get the R6 class, default Global Environment
+#' @param assignPos the position or character name of the environment in which to assign the S3 generics/methods, default Global Environment
+#' @usage R62S3(R6Class, getEnvir, assignPos)
 #' @return Assigns methods and generics to the chosen environment.
 #' @details The input must either be of class R6ClassGenerator or a character
 #'   string naming the R6ClassGenerator. Also assumes the classname is the same
@@ -19,17 +20,17 @@
 #' printer(pm, "Test String B")
 #'
 #' @export
-R62S3 <- function(R6Class, envir = .GlobalEnv){
+R62S3 <- function(R6Class, getEnvir = .GlobalEnv, assignPos = ".GlobalEnv"){
   checkmate::assert(inherits(R6Class,"character"),inherits(R6Class,"R6ClassGenerator"),
          .var.name = "R6Class must either be an R6ClassGenerator or a
          character string naming a generator.")
   if(checkmate::testCharacter(R6Class))
-    obj = get0(R6Class, envir = .GlobalEnv)
+    obj = get0(R6Class, envir = getEnvir)
   else
     obj = R6Class
   methods = obj$public_methods[!(names(obj$public_methods) %in% c("initialize","clone"))]
   for(i in 1:length(methods)){
-    getter = get0(names(methods)[[i]])
+    getter = get0(names(methods)[[i]], envir = getEnvir)
     x = FALSE
     generic = FALSE
     if(!is.null(getter)){
@@ -45,7 +46,7 @@ R62S3 <- function(R6Class, envir = .GlobalEnv){
         y = as.character(sys.call()[[1]])
         UseMethod(y, x)
       }
-      assign(paste0(names(methods)[[i]]), value, envir = envir)
+      assign(paste0(names(methods)[[i]]), value, pos = assignPos)
     }
     method = paste(names(methods)[[i]],obj$classname,sep=".")
     value = function(x, ...){
@@ -55,6 +56,6 @@ R62S3 <- function(R6Class, envir = .GlobalEnv){
       funCall = x[[method]]
       do.call(funCall, args)
     }
-    assign(paste0(method), value, envir = envir)
+    assign(paste0(method), value, pos = assignPos)
   }
 }
