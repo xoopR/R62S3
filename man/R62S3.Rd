@@ -4,10 +4,12 @@
 \alias{R62S3}
 \title{S3 Method Generator from R6 Class}
 \usage{
-R62S3(R6Class, getEnvir, assignEnvir)
+R62S3(R6Class, dispatchClasses, getEnvir, assignEnvir)
 }
 \arguments{
 \item{R6Class}{The R6ClassGenerator or Classname to generate public methods from}
+
+\item{dispatchClasses}{a list of classes to assign S3 dispatch methods on}
 
 \item{getEnvir}{which environment to look in to get the R6 class, default Global Environment}
 
@@ -29,7 +31,6 @@ printMachine <- R6::R6Class("printMachine",
 public = list(initialize = function() {},
 printer = function(str) {print(str)}))
 pm <- printMachine$new()
-R62S3("printMachine")
 R62S3(printMachine)
 pm$printer("Test String A")
 printer(pm, "Test String B")

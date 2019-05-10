@@ -2,9 +2,10 @@
 #'
 #' @description Auto-generates S3 generics and public methods from an R6 Class.
 #' @param R6Class The R6ClassGenerator or Classname to generate public methods from
+#' @param dispatchClasses a list of classes to assign S3 dispatch methods on
 #' @param getEnvir which environment to look in to get the R6 class, default Global Environment
 #' @param assignEnvir the environment in which to assign the S3 generics/methods, default Global Environment
-#' @usage R62S3(R6Class, getEnvir, assignEnvir)
+#' @usage R62S3(R6Class, dispatchClasses, getEnvir, assignEnvir)
 #' @return Assigns methods and generics to the chosen environment.
 #' @details The input must either be of class R6ClassGenerator or a character
 #'   string naming the R6ClassGenerator. Also assumes the classname is the same
@@ -14,20 +15,16 @@
 #'public = list(initialize = function() {},
 #'printer = function(str) {print(str)}))
 #' pm <- printMachine$new()
-#' R62S3("printMachine")
 #' R62S3(printMachine)
 #' pm$printer("Test String A")
 #' printer(pm, "Test String B")
 #'
 #' @export
-R62S3 <- function(R6Class, getEnvir = .GlobalEnv, assignEnvir = .GlobalEnv){
-  checkmate::assert(inherits(R6Class,"character"),inherits(R6Class,"R6ClassGenerator"),
-         .var.name = "R6Class must either be an R6ClassGenerator or a
-         character string naming a generator.")
-  if(checkmate::testCharacter(R6Class))
-    obj = get0(R6Class, envir = getEnvir)
-  else
-    obj = R6Class
+R62S3 <- function(R6Class, dispatchClasses = list(R6Class), getEnvir = .GlobalEnv, assignEnvir = .GlobalEnv){
+  checkmate::assert(inherits(R6Class,"R6ClassGenerator"),
+         .var.name = "R6Class must be an R6ClassGenerator")
+
+  obj = R6Class
   methods = obj$public_methods[!(names(obj$public_methods) %in% c("initialize","clone"))]
   for(i in 1:length(methods)){
     methodname = names(methods)[[i]]
@@ -49,13 +46,15 @@ R62S3 <- function(R6Class, getEnvir = .GlobalEnv, assignEnvir = .GlobalEnv){
       },list(y=methodname))
       assign(methodname, value, envir = assignEnvir)
     }
-    method = paste(methodname,obj$classname,sep=".")
-    pos = gregexpr(".",method,fixed=T)[[1]]
-    value = function(x, ...){}
-    body(value) = substitute({
-      args = list(...)
-      do.call(x[[method]], args)
-    },list(method=methodname))
-    assign(paste0(method), value, envir = assignEnvir)
+    lapply(dispatchClasses, function(y){
+      method = paste(methodname,y$classname,sep=".")
+      pos = gregexpr(".",method,fixed=T)[[1]]
+      value = function(x, ...){}
+      body(value) = substitute({
+        args = list(...)
+        do.call(x[[method]], args)
+      },list(method=methodname))
+      assign(paste0(method), value, envir = assignEnvir)
+    })
   }
 }
