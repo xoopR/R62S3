@@ -14,7 +14,7 @@ Useful to allow for a fully R6 object-oriented programming interface alongside f
 
 R62S3 is very simple to use as it consists of one function only! The usage (with defaults) is
 ````R
-R62S3(R6Class, dispatchClasses = list(R6Class), assignEnvir = .GlobalEnv)
+R62S3::R62S3(R6Class, dispatchClasses = list(R6Class), assignEnvir = .GlobalEnv)
 ````
 
 The parameters allow R62S3 to be a highly flexible method that can:
@@ -24,7 +24,7 @@ The parameters allow R62S3 to be a highly flexible method that can:
 I recommend it in your zzz.R file for any package that uses R6. This can either be done for specified classes:
 ````R
 .onLoad <- function(libname, pkgname){
-  R62S3::R62S3(yourR6Class, assignEnvir = parent.env(environment()))
+  R62S3::R62S3::R62S3(yourR6Class, assignEnvir = parent.env(environment()))
 }
 ````
 
@@ -34,7 +34,7 @@ Or for every R6 class:
 .onLoad <- function(libname, pkgname){
   lapply(ls(name=parent.env(environment())),function(x){
     if(inherits(get(x),"R6ClassGenerator"))
-      R62S3(get(x),assignEnvir = parent.env(parent.env(environment())))
+      R62S3::R62S3(get(x),assignEnvir = parent.env(parent.env(environment())))
   })
 }
 ````
