@@ -7,11 +7,11 @@
 R62S3(R6Class, dispatchClasses, assignEnvir)
 }
 \arguments{
-\item{R6Class}{The R6ClassGenerator or Classname to generate public methods from}
+\item{R6Class}{R6ClassGenerator to generate public methods from}
 
-\item{dispatchClasses}{a list of classes to assign S3 dispatch methods on}
+\item{dispatchClasses}{list of classes to assign S3 dispatch methods on}
 
-\item{assignEnvir}{the environment in which to assign the S3 generics/methods, default Global Environment}
+\item{assignEnvir}{environment in which to assign the S3 generics/methods, default Global Environment}
 }
 \value{
 Assigns methods and generics to the chosen environment.
@@ -20,9 +20,9 @@ Assigns methods and generics to the chosen environment.
 Auto-generates S3 generics and public methods from an R6 Class.
 }
 \details{
-The input must either be of class R6ClassGenerator or a character
-  string naming the R6ClassGenerator. Also assumes the classname is the same
-  as the R6ClassGenerator name.
+Searches in a given R6 class for all public methods that are not 'initialize' or 'clone'.
+For each method if a generic does not already exist, one is created and assigned to the given environment.
+Methods are created for every generic, following standard S3 convention.
 }
 \examples{
 printMachine <- R6::R6Class("printMachine",

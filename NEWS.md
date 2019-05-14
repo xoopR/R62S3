@@ -1,3 +1,7 @@
+# R62S3 1.2.1
+
+* Documentation update to match 1.1.0
+
 # R62S3 1.1.2
 
 * Note Fix: Title to Title Case

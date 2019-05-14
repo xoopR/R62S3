@@ -1,14 +1,14 @@
 #' S3 Method Generator from R6 Class
 #'
 #' @description Auto-generates S3 generics and public methods from an R6 Class.
-#' @param R6Class The R6ClassGenerator or Classname to generate public methods from
-#' @param dispatchClasses a list of classes to assign S3 dispatch methods on
-#' @param assignEnvir the environment in which to assign the S3 generics/methods, default Global Environment
+#' @param R6Class R6ClassGenerator to generate public methods from
+#' @param dispatchClasses list of classes to assign S3 dispatch methods on
+#' @param assignEnvir environment in which to assign the S3 generics/methods, default Global Environment
 #' @usage R62S3(R6Class, dispatchClasses, assignEnvir)
+#' @details Searches in a given R6 class for all public methods that are not 'initialize' or 'clone'.
+#' For each method if a generic does not already exist, one is created and assigned to the given environment.
+#' Methods are created for every generic, following standard S3 convention.
 #' @return Assigns methods and generics to the chosen environment.
-#' @details The input must either be of class R6ClassGenerator or a character
-#'   string naming the R6ClassGenerator. Also assumes the classname is the same
-#'   as the R6ClassGenerator name.
 #' @examples
 #' printMachine <- R6::R6Class("printMachine",
 #'public = list(initialize = function() {},
