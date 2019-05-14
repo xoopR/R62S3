@@ -1,3 +1,7 @@
+# R62S3 1.1.2
+
+* Note Fix: Title to Title Case
+
 # R62S3 1.1.1
 
 * Bug Fix: Moved R6 from Imports to Suggests
