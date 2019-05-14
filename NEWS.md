@@ -1,3 +1,7 @@
+# R62S3 1.1.1
+
+* Bug Fix: Moved R6 from Imports to Suggests
+
 # R62S3 1.1.0
 
 * Removed unnecessary `getEnvir`
