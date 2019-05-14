@@ -1,0 +1,11 @@
+language: r
+sudo: false
+dist: trusty
+
+cache: packages
+  
+r_packages:
+  - covr
+     
+after_success:
+  - Rscript -e 'library(covr); codecov()'
