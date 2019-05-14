@@ -2,12 +2,16 @@ language: r
 sudo: false
 dist: trusty
 
+os:
+  - linux
+  - osx
+  - windows
+  
 latex: true
 
 warnings_are_errors: false
 
 cache: packages
-  
   
 r_packages:
   - covr
