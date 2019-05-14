@@ -4,6 +4,7 @@
 ![Lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)
 ![CRAN Version](http://www.r-pkg.org/badges/version/R62S3)
 ![codecov](https://codecov.io/gh/RaphaelS1/R62S3/branch/master/graph/badge.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## What is R62S3?
 
