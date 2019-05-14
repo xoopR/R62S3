@@ -4,6 +4,8 @@ dist: trusty
 
 latex: true
 
+warnings_are_errors: false
+
 cache: packages
   
   
