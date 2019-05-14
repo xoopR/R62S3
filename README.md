@@ -1,6 +1,6 @@
 # R62S3
 
-![Build Status](https://travis-ci.com/RaphaelS1/R62S3.svg?branch=master)
+[![Build Status](https://travis-ci.com/RaphaelS1/R62S3.svg?branch=master)](https://travis-ci.com/RaphaelS1/R62S3)
 ![Lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)
 ![CRAN Version](http://www.r-pkg.org/badges/version/R62S3)
 ![codecov](https://codecov.io/gh/RaphaelS1/R62S3/branch/master/graph/badge.svg)
