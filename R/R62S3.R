@@ -28,17 +28,14 @@ R62S3 <- function(R6Class, dispatchClasses = list(R6Class), getEnvir = .GlobalEn
   methods = obj$public_methods[!(names(obj$public_methods) %in% c("initialize","clone"))]
   for(i in 1:length(methods)){
     methodname = names(methods)[[i]]
-    getter = get0(methodname, envir = getEnvir)
-    x = FALSE
+
     generic = FALSE
-    if(!is.null(getter)){
-      x = suppressWarnings(suppressMessages((try(methods(getter),silent=T))))
-      if(class(x)!="try-error"){
-        x = suppressWarnings(suppressMessages(methods(getter)))
-        if(length(x) > 0)
-          generic = TRUE
-      }
+    x = suppressWarnings(suppressMessages((try(methods(methodname),silent=T))))
+    if(class(x)!="try-error"){
+      if(length(x) > 0)
+        generic = TRUE
     }
+
     if(!generic){
       value = function(x,...){}
       body(value) = substitute({
@@ -46,9 +43,9 @@ R62S3 <- function(R6Class, dispatchClasses = list(R6Class), getEnvir = .GlobalEn
       },list(y=methodname))
       assign(methodname, value, envir = assignEnvir)
     }
+
     lapply(dispatchClasses, function(y){
       method = paste(methodname,y$classname,sep=".")
-      pos = gregexpr(".",method,fixed=T)[[1]]
       value = function(x, ...){}
       body(value) = substitute({
         args = list(...)
