@@ -4,7 +4,7 @@
 #' @param R6Class R6ClassGenerator to generate public methods from
 #' @param dispatchClasses list of classes to assign S3 dispatch methods on
 #' @param assignEnvir environment in which to assign the S3 generics/methods, default Global Environment
-#' @usage R62S3(R6Class, dispatchClasses, assignEnvir)
+#' @usage R62S3(R6Class, dispatchClasses = list(R6Class), assignEnvir = .GlobalEnv)
 #' @details Searches in a given R6 class for all public methods that are not 'initialize' or 'clone'.
 #' For each method if a generic does not already exist, one is created and assigned to the given environment.
 #' Methods are created for every generic, following standard S3 convention.

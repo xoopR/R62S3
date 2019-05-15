@@ -4,7 +4,7 @@
 \alias{R62S3}
 \title{S3 Method Generator from R6 Class}
 \usage{
-R62S3(R6Class, dispatchClasses, assignEnvir)
+R62S3(R6Class, dispatchClasses = list(R6Class), assignEnvir = .GlobalEnv)
 }
 \arguments{
 \item{R6Class}{R6ClassGenerator to generate public methods from}
