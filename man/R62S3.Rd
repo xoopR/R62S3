@@ -11,7 +11,7 @@ R62S3(R6Class, dispatchClasses = list(R6Class), assignEnvir = parent.env(environ
 
 \item{dispatchClasses}{list of classes to assign S3 dispatch methods on}
 
-\item{assignEnvir}{environment in which to assign the S3 generics/methods, default Global Environment}
+\item{assignEnvir}{environment in which to assign the S3 generics/methods, default is parent of current environment.}
 }
 \value{
 Assigns methods and generics to the chosen environment.
