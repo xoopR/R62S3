@@ -41,7 +41,14 @@ Or for every R6 class:
 }
 ````
 
-## Install with
+## Installation
+
+For a stable release, install from CRAN
+````R
+install.packages("R62S3")
+````
+
+Or install the latest dev build with
 
 ````R
 devtools::install_github("RaphaelS1/R62S3")
