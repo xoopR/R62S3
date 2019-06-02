@@ -1,6 +1,7 @@
 # R62S3 1.3.0
 
 * Changed the way a generic is defined to test for both errors "no function visible" and warnings "acts like an S3 but isn't"
+* Updated readme to reflect use of onAttach and as.environment("package:yourpkgname")
 
 # R62S3 1.2.1
 
