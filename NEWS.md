@@ -1,3 +1,7 @@
+# R62S3 1.3.0
+
+* Changed the way a generic is defined to test for both errors "no function visible" and warnings "acts like an S3 but isn't"
+
 # R62S3 1.2.1
 
 * Documentation update to match 1.1.0
