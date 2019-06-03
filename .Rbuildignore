@@ -1,4 +1,6 @@
 ^\.travis\.yml$
+^\.appveyor\.yml$
 cran-comments.md
 ^CRAN-RELEASE$
 docs
+CODE_OF_CONDUCT.md
