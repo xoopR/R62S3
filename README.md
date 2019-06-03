@@ -1,6 +1,7 @@
 # R62S3
 
-[![Build Status](https://travis-ci.com/RaphaelS1/R62S3.svg?branch=master)](https://travis-ci.com/RaphaelS1/R62S3)
+[![Travis Build Status](https://travis-ci.com/RaphaelS1/R62S3.svg?branch=master)](https://travis-ci.com/RaphaelS1/R62S3)
+[![Appveyor Build status](https://ci.appveyor.com/api/projects/status/olstl9l368ofl5el?svg=true)](https://ci.appveyor.com/project/RaphaelS1/r62s3)
 [![Lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)
 [![codecov](https://codecov.io/gh/RaphaelS1/R62S3/branch/master/graph/badge.svg)](https://codecov.io/gh/RaphaelS1/R62S3/branch/master/graph/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
