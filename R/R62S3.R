@@ -5,7 +5,8 @@
 #' @param dispatchClasses list of classes to assign S3 dispatch methods on
 #' @param assignEnvir environment in which to assign the S3 generics/methods, default is parent of current environment.
 #' @param mask logical, determines if non-generic functions should be masked if found, see details.
-#' @usage R62S3(R6Class, dispatchClasses = list(R6Class), assignEnvir = parent.env(environment()))
+#' @usage R62S3(R6Class, dispatchClasses = list(R6Class), assignEnvir = parent.env(environment()),
+#' mask = FALSE)
 #' @details Searches in a given R6 class for all public methods that are not 'initialize' or 'clone'.
 #' For each method if a generic does not already exist, one is created and assigned to the given environment.
 #' Methods are created for every generic, following standard S3 convention.

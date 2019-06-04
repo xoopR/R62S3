@@ -1,3 +1,7 @@
+# R62S3 1.4.1
+
+* Bug fixes due to masking update
+
 # R62S3 1.4.0
 
 * Dispatch argument update!

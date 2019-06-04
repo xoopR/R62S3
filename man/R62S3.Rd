@@ -4,7 +4,8 @@
 \alias{R62S3}
 \title{S3 Method Generator from R6 Class}
 \usage{
-R62S3(R6Class, dispatchClasses = list(R6Class), assignEnvir = parent.env(environment()))
+R62S3(R6Class, dispatchClasses = list(R6Class), assignEnvir = parent.env(environment()),
+mask = FALSE)
 }
 \arguments{
 \item{R6Class}{R6ClassGenerator to generate public methods from}
@@ -12,6 +13,8 @@ R62S3(R6Class, dispatchClasses = list(R6Class), assignEnvir = parent.env(environ
 \item{dispatchClasses}{list of classes to assign S3 dispatch methods on}
 
 \item{assignEnvir}{environment in which to assign the S3 generics/methods, default is parent of current environment.}
+
+\item{mask}{logical, determines if non-generic functions should be masked if found, see details.}
 }
 \value{
 Assigns methods and generics to the chosen environment.
@@ -23,6 +26,10 @@ Auto-generates S3 generics and public methods from an R6 Class.
 Searches in a given R6 class for all public methods that are not 'initialize' or 'clone'.
 For each method if a generic does not already exist, one is created and assigned to the given environment.
 Methods are created for every generic, following standard S3 convention.
+
+In some cases a function may be defined without being a generic, if mask is TRUE then this function
+is masked by R62S3 and a generic is created with the same name. If mask is FALSE then this function
+is treaed like a generic and only the method is created.
 }
 \examples{
 printMachine <- R6::R6Class("printMachine",
