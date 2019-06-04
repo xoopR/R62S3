@@ -49,10 +49,10 @@ For a stable release, install from CRAN
 install.packages("R62S3")
 ````
 
-Or install the latest dev build with
+Or install the latest stable build from GitHub with
 
 ````R
-devtools::install_github("RaphaelS1/R62S3", "dev")
+devtools::install_github("RaphaelS1/R62S3")
 ````
 
 ### Acknowledgements
