@@ -73,7 +73,7 @@ R62S3 <- function(R6Class, dispatchClasses = list(R6Class),
           args$object = NULL
           do.call(object[[method]], args)
         },list(method=methodname))
-        assign(paste0(method), value, envir = assignEnvir)
+        assign(paste0(method), value, envir = parent.env(assignEnvir))
       })
     }
   }
