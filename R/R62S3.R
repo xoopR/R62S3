@@ -66,7 +66,7 @@ R62S3 <- function(R6Class, dispatchClasses = list(R6Class),
       lapply(dispatchClasses, function(y){
         method = paste(methodname,y$classname,sep=".")
         value = function(object){}
-        formals(value) = c(formals(value), formals(methods[[i]]))
+        formals(value) = c(formals(value), formals(methods[[i]]),alist(...=))
         body(value) = substitute({
           args = as.list(match.call())
           args[[1]] = NULL
