@@ -47,3 +47,12 @@ environment:
   global:
     USE_RTOOLS: true
     WARNINGS_ARE_ERRORS: true
+
+cache:
+  - C:\RLibrary\
+
+notifications:
+  - provider: Email
+    on_build_success: false
+    on_build_failure: false
+    on_build_status_changed: true
