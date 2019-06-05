@@ -3,9 +3,10 @@
 #' @description Auto-generates S3 generics and public methods from an R6 Class.
 #' @param R6Class R6ClassGenerator to generate public methods from
 #' @param dispatchClasses list of classes to assign S3 dispatch methods on
-#' @param pos environment in which to assign the S3 generics/methods, default is parent of current environment.
+#' @param assignEnvir environment in which to assign the S3 generics/methods, default is parent of current environment.
 #' @param mask logical, determines if non-generic functions should be masked if found, see details.
-#' @usage R62S3(R6Class, dispatchClasses = list(R6Class), pos = -1, mask = FALSE)
+#' @usage R62S3(R6Class, dispatchClasses = list(R6Class), assignEnvir = parent.env(environment()),
+#' mask = FALSE)
 #' @details Searches in a given R6 class for all public methods that are not 'initialize' or 'clone'.
 #' For each method if a generic does not already exist, one is created and assigned to the given environment.
 #' Methods are created for every generic, following standard S3 convention.
@@ -20,13 +21,13 @@
 #'public = list(initialize = function() {},
 #'printer = function(str) {print(str)}))
 #' pm <- printMachine$new()
-#' R62S3(printMachine)
+#' R62S3(printMachine, assignEnvir = .GlobalEnv)
 #' pm$printer("Test String A")
 #' printer(pm, "Test String B")
 #'
 #' @export
 R62S3 <- function(R6Class, dispatchClasses = list(R6Class),
-                  pos = -1, mask = FALSE){
+                  assignEnvir = parent.env(environment()), mask = FALSE){
   checkmate::assert(inherits(R6Class,"R6ClassGenerator"),
                     .var.name = "R6Class must be an R6ClassGenerator")
 
@@ -59,7 +60,7 @@ R62S3 <- function(R6Class, dispatchClasses = list(R6Class),
         body(value) = substitute({
           UseMethod(y, object)
         },list(y=methodname))
-        assign(methodname, value, pos = pos)
+        assign(methodname, value, envir = assignEnvir)
       }
 
       lapply(dispatchClasses, function(y){
@@ -72,7 +73,7 @@ R62S3 <- function(R6Class, dispatchClasses = list(R6Class),
           args$object = NULL
           do.call(object[[method]], args)
         },list(method=methodname))
-        assign(paste0(method), value, pos = pos)
+        assign(paste0(method), value, envir = assignEnvir)
       })
     }
   }
