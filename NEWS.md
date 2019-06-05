@@ -1,3 +1,7 @@
+# R62S3 1.4.2
+
+* Added better S3 generic/method compatibility by adding ... to method formals
+
 # R62S3 1.4.1
 
 * Bug fixes due to masking update
