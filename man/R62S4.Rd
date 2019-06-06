@@ -5,14 +5,14 @@
 \title{S4 Method Generator from R6 Class}
 \usage{
 R62S4(R6Class, dispatchClasses = list(R6Class),
-package = methods::getPackageName(parent.env(environment())), mask = FALSE)
+  assignEnvir = parent.env(environment()), mask = FALSE)
 }
 \arguments{
 \item{R6Class}{R6ClassGenerator to generate public methods from}
 
 \item{dispatchClasses}{list of classes to assign S4 dispatch methods on}
 
-\item{package}{package to store generic and methods.}
+\item{assignEnvir}{environment in which to assign the S4 methods, default is parent of current environment.}
 
 \item{mask}{logical, determines if non-generic functions should be masked if found, see details.}
 }

@@ -27,3 +27,10 @@ test_that("mask FALSE",{
   expect_equal(pdf.masker(masker$new()), "Test masker")
 })
 
+masker <- R6::R6Class("masker",public = list(pdf = function() return("Test masker")))
+
+test_that("mask TRUE",{
+  expect_silent(R62S3(masker, assignEnvir = .GlobalEnv, mask = TRUE))
+  expect_equal(pdf(masker$new()), "Test masker")
+  expect_equal(pdf.masker(masker$new()), "Test masker")
+})

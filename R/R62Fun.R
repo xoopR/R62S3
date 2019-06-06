@@ -3,7 +3,6 @@
 #' @description Auto-generates methods from an R6 Class.
 #' @param R6Class R6ClassGenerator to generate public methods from
 #' @param assignEnvir environment in which to assign the S4 generics/methods, default is parent of current environment.
-#' @usage R62Fun(R6Class, assignEnvir = parent.env(environment()))
 #' @details Searches in a given R6 class for all public methods that are not 'initialize' or 'clone'.
 #' For each method if a generic does not already exist, one is created and assigned to the given environment.
 #' Methods are created for every generic, following standard S4 convention.

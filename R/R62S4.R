@@ -3,10 +3,8 @@
 #' @description Auto-generates S4 generics and public methods from an R6 Class.
 #' @param R6Class R6ClassGenerator to generate public methods from
 #' @param dispatchClasses list of classes to assign S4 dispatch methods on
-#' @param package package to store generic and methods.
+#' @param assignEnvir environment in which to assign the S4 methods, default is parent of current environment.
 #' @param mask logical, determines if non-generic functions should be masked if found, see details.
-#' @usage R62S4(R6Class, dispatchClasses = list(R6Class),
-#' package = methods::getPackageName(parent.env(environment())), mask = FALSE)
 #' @details Searches in a given R6 class for all public methods that are not 'initialize' or 'clone'.
 #' For each method if a generic does not already exist, one is created and assigned to the given environment.
 #' Methods are created for every generic, following standard S4 convention.
@@ -29,7 +27,8 @@
 #'
 #' @export
 R62S4 <- function(R6Class, dispatchClasses = list(R6Class),
-                  package = methods::getPackageName(parent.env(environment())), mask = FALSE){
+                  assignEnvir = parent.env(environment()),
+                  mask = FALSE){
   checkmate::assert(inherits(R6Class,"R6ClassGenerator"),
                     .var.name = "R6Class must be an R6ClassGenerator")
 
@@ -45,7 +44,7 @@ R62S4 <- function(R6Class, dispatchClasses = list(R6Class),
       if(mask){
         x = tryCatch(methods(methodname),warning = function(w) w, error = function(e) e)
         if(inherits(x, "condition")){
-          if(!grepl("appears not to be S4 generic",x$message) & !inherits(x, "error"))
+          if(!grepl("appears not to be S3 generic",x$message) & !inherits(x, "error"))
             generic = TRUE
         } else
           generic = TRUE
@@ -58,22 +57,22 @@ R62S4 <- function(R6Class, dispatchClasses = list(R6Class),
       }
 
       if(!generic){
-        value = function(object, ...){}
-        methods::setGeneric(methodname, def = value, package = package)
+        def = function(object, ...){}
+        methods::setGeneric(methodname, def = def, where = assignEnvir)
       }
 
-      lapply(dispatchClasses, function(y){
-        methods::setOldClass(y$classname)
-        method = paste(methodname,y$classname,sep=".")
-        value = function(object){}
-        formals(value) = c(formals(value), formals(methods[[i]]),alist(...=))
-        body(value) = substitute({
-          args = as.list(match.call())
-          args[[1]] = NULL
-          args$object = NULL
-          do.call(object[[method]], args)
-        },list(method=methodname))
-        methods::setMethod(methodname, y$classname, def = value)
+      lapply(dispatchClasses, function(x) methods::setOldClass(x$classname, where = assignEnvir))
+      arg1 = formals(get(methodname))[1]
+      value = function(){}
+      formals(value) = c(arg1,formals(methods[[i]]),alist(...=))
+      body(value) = substitute({
+        args = as.list(match.call())
+        args[[1]] = NULL
+        args$object = NULL
+        do.call(get(object)[[method]], args)
+      },list(method=methodname, object = names(arg1)[[1]]))
+      lapply(dispatchClasses, function(x){
+        methods::setMethod(methodname, x$classname, def = value, where = assignEnvir)
       })
     }
   }
