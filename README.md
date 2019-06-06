@@ -52,7 +52,7 @@ install.packages("R62S3")
 Or install the latest stable build from GitHub with
 
 ````R
-devtools::install_github("RaphaelS1/R62S3", "dev")
+remotes::install_github("RaphaelS1/R62S3")
 ````
 
 ### Acknowledgements
