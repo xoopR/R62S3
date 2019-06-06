@@ -1,3 +1,8 @@
+# R62S3 2.0.1.9000
+
+* Updated parameters of R62S4 and R62Fun
+  * Now full control over where generics, methods and classes are assigned to (all to same environment)
+
 # R62S3 2.0.0.9000
 
 * Big unexpected update! R62S3 has two new functions
