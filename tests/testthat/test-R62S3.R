@@ -29,8 +29,24 @@ test_that("mask FALSE",{
 
 masker <- R6::R6Class("masker",public = list(pdf = function() return("Test masker")))
 
-test_that("mask TRUE",{
+test_that("mask TRUE gen",{
   expect_silent(R62S3(masker, assignEnvir = .GlobalEnv, mask = TRUE))
   expect_equal(pdf(masker$new()), "Test masker")
   expect_equal(pdf.masker(masker$new()), "Test masker")
+})
+
+printer <- R6::R6Class("masker",public = list(print = function() return("Test printer")))
+
+test_that("mask TRUE s3gen",{
+  expect_silent(R62S3(printer, assignEnvir = .GlobalEnv, mask = TRUE))
+  expect_equal(print(printer$new()), "Test printer")
+  expect_equal(print.masker(printer$new()), "Test printer")
+})
+
+printer <- R6::R6Class("printer",public = list(prints = function() return("Test printer")))
+
+test_that("mask TRUE no gen",{
+  expect_silent(R62S3(printer, assignEnvir = .GlobalEnv, mask = TRUE))
+  expect_equal(prints(printer$new()), "Test printer")
+  expect_equal(prints.printer(printer$new()), "Test printer")
 })
