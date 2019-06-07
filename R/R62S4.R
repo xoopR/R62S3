@@ -15,15 +15,12 @@
 #'
 #' @return Assigns methods and generics to the chosen environment.
 #' @examples
-#' \dontrun{
-#' printMachine <- R6::R6Class("printMachine",
-#'public = list(initialize = function() {},
-#'printer = function(str) {print(str)}))
+#' printMachine <- R6::R6Class("printMachine", public = list(initialize = function() {},
+#'                             printer = function(str) {print(str)}))
 #' pm <- printMachine$new()
-#' R62S4(printMachine)
+#' R62S4(printMachine, assignEnvir = .GlobalEnv)
 #' pm$printer("Test String A")
 #' printer(pm, "Test String B")
-#' }
 #'
 #' @export
 R62S4 <- function(R6Class, dispatchClasses = list(R6Class),

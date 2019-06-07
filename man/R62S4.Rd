@@ -32,14 +32,11 @@ is masked by R62S4 and a generic is created with the same name. If mask is FALSE
 is treaed like a generic and only the method is created.
 }
 \examples{
-\dontrun{
-printMachine <- R6::R6Class("printMachine",
-public = list(initialize = function() {},
-printer = function(str) {print(str)}))
+printMachine <- R6::R6Class("printMachine", public = list(initialize = function() {},
+                            printer = function(str) {print(str)}))
 pm <- printMachine$new()
-R62S4(printMachine)
+R62S4(printMachine, assignEnvir = .GlobalEnv)
 pm$printer("Test String A")
 printer(pm, "Test String B")
-}
 
 }
