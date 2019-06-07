@@ -1,3 +1,9 @@
+# R62S3 2.1.1
+
+* Now live! Functionality for S4 classes and methods outside an OOP paradigm.
+* Website to be updated to reflect the new methods.
+* Suggestions for a better name for R62Fun are welcome!
+
 # R62S3 2.1.1.9000
 
 * Extended R62Fun to be able to detect for generics and define methods accordingly
