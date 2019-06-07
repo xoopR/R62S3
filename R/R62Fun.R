@@ -5,12 +5,19 @@
 #' @param assignEnvir environment in which to assign the S4 generics/methods, default is parent of current environment.
 #' @param detectGeneric logical, if TRUE (default) detects if the method has a S3 generic and defines function accordingly
 #' @param mask logical, should the new method mask existing ones? See details.
+#' @param dispatchClasses list of classes to assign S3 dispatch methods on. See Details.
 #' @details Searches in a given R6 class for all public methods that are not 'initialize' or 'clone'.
-#' Creates a function to call eac of the R6 methods. Additional parameters allow the user to specify
-#' if a generic function should be detected, if so then a dispatch method is created instead. Can also
-#' choose if masking should occur, if TRUE then the function is created even if one of the same name
-#' exists, if FALSE then the function name is appended with ".classname" like a dispatch method.
-#' @return Assigns methods and generics to the chosen environment.
+#' Creates a function to call each of the R6 methods.
+#'
+#' Additional parameters allow the user to specify if a generic function should be detected. If so
+#' then a dispatch method is created instead of a standard function. The \code{mask} parameter determines
+#' if masking should occur, if TRUE then the function is created even if one of the same name
+#' exists, if FALSE then the function name is appended with ".ClassName" like a dispatch method.
+#'
+#' If \code{mask = FALSE} or \code{detectGeneric = TRUE}, \code{dispatchClasses} specifies what class
+#' the method should be associated with, i.e. \code{method.ClassName}.
+#'
+#' @return Assigns methods to the chosen environment.
 #' @examples
 #' printMachine <- R6::R6Class("printMachine",
 #'public = list(initialize = function() {},
@@ -22,13 +29,17 @@
 #'
 #' @export
 R62Fun <- function(R6Class, assignEnvir = parent.env(environment()),
-                   detectGeneric = TRUE, mask = FALSE){
+                   detectGeneric = TRUE, mask = FALSE,
+                   dispatchClasses = list(R6Class)){
 
   checkmate::assert(inherits(R6Class,"R6ClassGenerator"),
                     .var.name = "R6Class must be an R6ClassGenerator")
 
   obj = R6Class
   methods = obj$public_methods[!(names(obj$public_methods) %in% c("initialize","clone"))]
+
+  if(!detectGeneric & mask)
+    dispatchClasses = list(R6Class)
 
   if(length(methods)>0){
     for(i in 1:length(methods)){
@@ -52,18 +63,25 @@ R62Fun <- function(R6Class, assignEnvir = parent.env(environment()),
         }
 
         if(generic)
-          methodname = paste(names(methods)[[i]],R6Class$classname,sep=".")
+          methodname = lapply(dispatchClasses, function(x) paste(names(methods)[[i]],x$classname,sep="."))
+      } else if(!mask){
+        methodname = RSmisc::ifnerror(get(methodname),
+                                      lapply(dispatchClasses, function(x) paste(names(methods)[[i]],x$classname,sep=".")),
+                                      methodname)
       }
 
-      value = function(object){}
-      formals(value) = c(formals(value), formals(methods[[i]]))
-      body(value) = substitute({
-        args = as.list(match.call())
-        args[[1]] = NULL
-        args$object = NULL
-        do.call(object[[method]], args)
-      },list(method=methodname))
-      assign(methodname, value, envir = assignEnvir)
+      for(i in length(dispatchClasses)){
+        value = function(object){}
+        formals(value) = c(formals(value), formals(methods[[i]]))
+        body(value) = substitute({
+          args = as.list(match.call())
+          args[[1]] = NULL
+          args$object = NULL
+          do.call(object[[method]], args)
+        },list(method=methodname[[i]]))
+        assign(methodname[[i]], value, envir = assignEnvir)
+      }
+
     }
   }
 }

@@ -4,7 +4,8 @@ Version: 2.1.1.9000
 Authors@R: person("Raphael", "Sonabend", email = "raphael.sonabend.15@ucl.ac.uk", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-9225-4654"))
 Description: After defining an R6 class, R62S3 is used to automatically generate S3 generics and methods for dispatch. Also allows piping for R6 objects.
 Depends: R (>= 3.4.0)
-Imports: checkmate, methods
+Imports: checkmate, methods, RSmisc
+Remotes: RaphaelS1/RSmisc
 Suggests: testthat, R6, pkgdown
 License: MIT + file LICENSE
 Encoding: UTF-8

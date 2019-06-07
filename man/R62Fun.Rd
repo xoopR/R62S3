@@ -5,7 +5,8 @@
 \title{Method Generator from R6 Class}
 \usage{
 R62Fun(R6Class, assignEnvir = parent.env(environment()),
-  detectGeneric = TRUE, mask = FALSE)
+  detectGeneric = TRUE, mask = FALSE,
+  dispatchClasses = list(R6Class))
 }
 \arguments{
 \item{R6Class}{R6ClassGenerator to generate public methods from}
@@ -15,19 +16,26 @@ R62Fun(R6Class, assignEnvir = parent.env(environment()),
 \item{detectGeneric}{logical, if TRUE (default) detects if the method has a S3 generic and defines function accordingly}
 
 \item{mask}{logical, should the new method mask existing ones? See details.}
+
+\item{dispatchClasses}{list of classes to assign S3 dispatch methods on. See Details.}
 }
 \value{
-Assigns methods and generics to the chosen environment.
+Assigns methods to the chosen environment.
 }
 \description{
 Auto-generates methods from an R6 Class.
 }
 \details{
 Searches in a given R6 class for all public methods that are not 'initialize' or 'clone'.
-Creates a function to call eac of the R6 methods. Additional parameters allow the user to specify
-if a generic function should be detected, if so then a dispatch method is created instead. Can also
-choose if masking should occur, if TRUE then the function is created even if one of the same name
-exists, if FALSE then the function name is appended with ".classname" like a dispatch method.
+Creates a function to call each of the R6 methods.
+
+Additional parameters allow the user to specify if a generic function should be detected. If so
+then a dispatch method is created instead of a standard function. The \code{mask} parameter determines
+if masking should occur, if TRUE then the function is created even if one of the same name
+exists, if FALSE then the function name is appended with ".ClassName" like a dispatch method.
+
+If \code{mask = FALSE} or \code{detectGeneric = TRUE}, \code{dispatchClasses} specifies what class
+the method should be associated with, i.e. \code{method.ClassName}.
 }
 \examples{
 printMachine <- R6::R6Class("printMachine",
