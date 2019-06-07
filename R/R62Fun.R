@@ -44,6 +44,7 @@ R62Fun <- function(R6Class, assignEnvir = parent.env(environment()),
   if(length(methods)>0){
     for(i in 1:length(methods)){
       methodname = names(methods)[[i]]
+      assignname = methodname
 
       if(detectGeneric){
         generic = FALSE
@@ -63,9 +64,9 @@ R62Fun <- function(R6Class, assignEnvir = parent.env(environment()),
         }
 
         if(generic)
-          methodname = lapply(dispatchClasses, function(x) paste(names(methods)[[i]],x$classname,sep="."))
+          assignname = lapply(dispatchClasses, function(x) paste(names(methods)[[i]],x$classname,sep="."))
       } else if(!mask){
-        methodname = RSmisc::ifnerror(get(methodname),
+        assignname = RSmisc::ifnerror(get(methodname),
                                       lapply(dispatchClasses, function(x) paste(names(methods)[[i]],x$classname,sep=".")),
                                       methodname)
       }
@@ -79,7 +80,7 @@ R62Fun <- function(R6Class, assignEnvir = parent.env(environment()),
           args$object = NULL
           do.call(object[[method]], args)
         },list(method=methodname[[i]]))
-        assign(methodname[[i]], value, envir = assignEnvir)
+        assign(assignname[[i]], value, envir = assignEnvir)
       }
 
     }
