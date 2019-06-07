@@ -5,7 +5,7 @@
 \title{Method Generator from R6 Class}
 \usage{
 R62Fun(R6Class, assignEnvir = parent.env(environment()),
-  detectGeneric = TRUE)
+  detectGeneric = TRUE, mask = FALSE)
 }
 \arguments{
 \item{R6Class}{R6ClassGenerator to generate public methods from}
@@ -13,6 +13,8 @@ R62Fun(R6Class, assignEnvir = parent.env(environment()),
 \item{assignEnvir}{environment in which to assign the S4 generics/methods, default is parent of current environment.}
 
 \item{detectGeneric}{logical, if TRUE (default) detects if the method has a S3 generic and defines function accordingly}
+
+\item{mask}{logical, should the new method mask existing ones? See details.}
 }
 \value{
 Assigns methods and generics to the chosen environment.
@@ -22,8 +24,10 @@ Auto-generates methods from an R6 Class.
 }
 \details{
 Searches in a given R6 class for all public methods that are not 'initialize' or 'clone'.
-For each method if a generic does not already exist, one is created and assigned to the given environment.
-Methods are created for every generic, following standard S4 convention.
+Creates a function to call eac of the R6 methods. Additional parameters allow the user to specify
+if a generic function should be detected, if so then a dispatch method is created instead. Can also
+choose if masking should occur, if TRUE then the function is created even if one of the same name
+exists, if FALSE then the function name is appended with ".classname" like a dispatch method.
 }
 \examples{
 printMachine <- R6::R6Class("printMachine",
