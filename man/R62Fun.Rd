@@ -4,12 +4,15 @@
 \alias{R62Fun}
 \title{Method Generator from R6 Class}
 \usage{
-R62Fun(R6Class, assignEnvir = parent.env(environment()))
+R62Fun(R6Class, assignEnvir = parent.env(environment()),
+  detectGeneric = TRUE)
 }
 \arguments{
 \item{R6Class}{R6ClassGenerator to generate public methods from}
 
 \item{assignEnvir}{environment in which to assign the S4 generics/methods, default is parent of current environment.}
+
+\item{detectGeneric}{logical, if TRUE (default) detects if the method has a S3 generic and defines function accordingly}
 }
 \value{
 Assigns methods and generics to the chosen environment.

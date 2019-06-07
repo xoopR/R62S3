@@ -43,7 +43,7 @@ R62S3 <- function(R6Class, dispatchClasses = list(R6Class),
         if(inherits(x, "condition")){
           if(!grepl("appears not to be S3 generic",x$message) & !inherits(x, "error"))
             generic = TRUE
-        } else
+        } else if(length(x)!=0)
           generic = TRUE
       } else{
         x = suppressWarnings(suppressMessages((try(methods(methodname),silent=T))))

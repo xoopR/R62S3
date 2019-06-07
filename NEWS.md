@@ -1,3 +1,8 @@
+# R62S3 2.1.1.9000
+
+* Extended R62Fun to be able to detect for generics and define methods accordingly
+* Fixed bug in R62S3 that was erroneously finding generics
+
 # R62S3 2.0.1.9000
 
 * Updated parameters of R62S4 and R62Fun
