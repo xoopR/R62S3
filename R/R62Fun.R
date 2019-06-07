@@ -32,6 +32,8 @@ R62Fun <- function(R6Class, assignEnvir = parent.env(environment()),
 
   if(length(methods)>0){
     for(i in 1:length(methods)){
+      methodname = names(methods)[[i]]
+
       if(detectGeneric){
         generic = FALSE
         if(mask){
@@ -51,10 +53,7 @@ R62Fun <- function(R6Class, assignEnvir = parent.env(environment()),
 
         if(generic)
           methodname = paste(names(methods)[[i]],R6Class$classname,sep=".")
-        else
-          methodname = names(methods)[[i]]
-      } else
-        methodname = names(methods)[[i]]
+      }
 
       value = function(object){}
       formals(value) = c(formals(value), formals(methods[[i]]))
