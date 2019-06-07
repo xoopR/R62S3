@@ -1,3 +1,23 @@
+# R62S3 2.1.1.9000
+
+* Extended R62Fun to be able to detect for generics and define methods accordingly
+* Fixed bug in R62S3 that was erroneously finding generics
+
+# R62S3 2.0.1.9000
+
+* Updated parameters of R62S4 and R62Fun
+  * Now full control over where generics, methods and classes are assigned to (all to same environment)
+
+# R62S3 2.0.0.9000
+
+* Big unexpected update! R62S3 has two new functions
+  * R62S4: Generate S4 generics and methods from R6 classes
+  * R62Fun: Generate functions only from R6 Classes
+
+# R62S3 1.4.2
+
+* Added better S3 generic/method compatibility by adding ... to method formals
+
 # R62S3 1.4.1
 
 * Bug fixes due to masking update
