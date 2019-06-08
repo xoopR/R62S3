@@ -51,15 +51,22 @@ R62Fun <- function(R6Class, assignEnvir = parent.env(environment()),
         if(mask){
           x = tryCatch(methods(methodname),warning = function(w) w, error = function(e) e)
           if(inherits(x, "condition")){
-            if(!grepl("appears not to be S3 generic",x$message) & !inherits(x, "error"))
+            if(!grepl("appears not to be S3 generic",x$message) & !inherits(x, "error")){
               generic = TRUE
-          } else if(length(x)!=0)
+              arg1 = formals(get(methodname))[1]
+            }
+          } else if(length(x)!=0){
             generic = TRUE
+            arg1 = formals(get(methodname))[1]
+          }
+
         } else{
           x = suppressWarnings(suppressMessages((try(methods(methodname),silent=T))))
           if(class(x)!="try-error"){
-            if(length(x) > 0)
+            if(length(x) > 0){
               generic = TRUE
+              arg1 = formals(get(methodname))[1]
+            }
           }
         }
 
@@ -72,14 +79,20 @@ R62Fun <- function(R6Class, assignEnvir = parent.env(environment()),
       }
 
       for(j in 1:length(dispatchClasses)){
-        value = function(object){}
-        formals(value) = c(formals(value), formals(methods[[i]]))
+        if(!generic)
+          arg1 <- "object"
+        else
+          arg1 <- names(arg1)[[1]]
+        x = alist(x=)
+        names(x) = arg1
+        value = function(){}
+        formals(value) = c(x, formals(methods[[i]]))
         body(value) = substitute({
           args = as.list(match.call())
           args[[1]] = NULL
           args$object = NULL
-          do.call(object[[method]], args)
-        },list(method=methodname[[j]]))
+          do.call(get(object)[[method]], args)
+        },list(method=methodname[[j]], object = arg1))
         assign(assignname[[j]], value, envir = assignEnvir)
       }
 

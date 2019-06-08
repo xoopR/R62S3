@@ -60,17 +60,18 @@ R62S3 <- function(R6Class, dispatchClasses = list(R6Class),
         },list(y=methodname))
         assign(methodname, value, envir = assignEnvir)
       }
+        arg1 = formals(get(methodname))[1]
 
       lapply(dispatchClasses, function(y){
         method = paste(methodname,y$classname,sep=".")
-        value = function(object){}
-        formals(value) = c(formals(value), formals(methods[[i]]),alist(...=))
+        value = function(){}
+        formals(value) = c(arg1,formals(methods[[i]]),alist(...=))
         body(value) = substitute({
           args = as.list(match.call())
           args[[1]] = NULL
           args$object = NULL
-          do.call(object[[method]], args)
-        },list(method=methodname))
+          do.call(get(object)[[method]], args)
+        },list(method=methodname, object = names(arg1)[[1]]))
         assign(paste0(method), value, envir = assignEnvir)
       })
     }
