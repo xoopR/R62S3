@@ -71,7 +71,7 @@ R62Fun <- function(R6Class, assignEnvir = parent.env(environment()),
                                       methodname)
       }
 
-      for(i in length(dispatchClasses)){
+      for(j in 1:length(dispatchClasses)){
         value = function(object){}
         formals(value) = c(formals(value), formals(methods[[i]]))
         body(value) = substitute({
@@ -79,8 +79,8 @@ R62Fun <- function(R6Class, assignEnvir = parent.env(environment()),
           args[[1]] = NULL
           args$object = NULL
           do.call(object[[method]], args)
-        },list(method=methodname[[i]]))
-        assign(assignname[[i]], value, envir = assignEnvir)
+        },list(method=methodname[[j]]))
+        assign(assignname[[j]], value, envir = assignEnvir)
       }
 
     }
