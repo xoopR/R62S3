@@ -79,9 +79,12 @@ R62Fun <- function(R6Class, assignEnvir = parent.env(environment()),
       }
 
       for(j in 1:length(dispatchClasses)){
-        if(!generic)
-          arg1 <- "object"
-        else
+        if(detectGeneric){
+          if(!generic)
+            arg1 <- "object"
+          else
+            arg1 <- names(arg1)[[1]]
+        } else
           arg1 <- names(arg1)[[1]]
         x = alist(x=)
         names(x) = arg1
