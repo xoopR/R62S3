@@ -47,8 +47,9 @@ R62S3 <- function(R6Class, dispatchClasses = list(R6Class),
           generic = TRUE
       } else{
         x = suppressWarnings(suppressMessages((try(methods(methodname),silent=T))))
-        if(class(x)!="try-error"){
-          if(length(x) > 0)
+        y = suppressWarnings(suppressMessages((try(get(methodname),silent=T))))
+        if(class(x)!="try-error" | class(y)!="try-error"){
+          if(length(x) > 0 | length(y) > 0)
             generic = TRUE
         }
       }
@@ -61,6 +62,7 @@ R62S3 <- function(R6Class, dispatchClasses = list(R6Class),
         assign(methodname, value, envir = assignEnvir)
       }
         arg1 = formals(get(methodname))[1]
+        if(is.null(arg1)) arg1 = alist(x = )
 
       lapply(dispatchClasses, function(y){
         method = paste(methodname,y$classname,sep=".")

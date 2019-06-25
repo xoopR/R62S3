@@ -19,12 +19,11 @@ test_that("generic",{
   expect_silent(get("print"))
 })
 
-masker <- R6::R6Class("masker",public = list(pdf = function() return("Test masker")))
+masker <- R6::R6Class("masker",public = list(abs = function() return("Test masker")))
 
 test_that("mask FALSE",{
   expect_silent(R62S3(masker, assignEnvir = .GlobalEnv, mask = FALSE))
-  expect_error(pdf(masker$new()))
-  expect_equal(pdf.masker(masker$new()), "Test masker")
+  expect_equal(abs.masker(masker$new()), "Test masker")
 })
 
 masker <- R6::R6Class("masker",public = list(pdf = function() return("Test masker")))
