@@ -2,8 +2,8 @@
 #'
 #' @description Auto-generates methods from an R6 Class.
 #' @param R6Class R6ClassGenerator to generate public methods from
-#' @param assignEnvir environment in which to assign the S4 generics/methods, default is parent of current environment.
-#' @param detectGeneric logical, if TRUE (default) detects if the method has a S3 generic and defines function accordingly
+#' @param assignEnvir environment in which to assign the functions, default is parent of current environment.
+#' @param detectGeneric logical, if TRUE (default) detects if the method has a S3 generic and defines functions accordingly
 #' @param mask logical, should the new method mask existing ones? See details.
 #' @param dispatchClasses list of classes to assign S3 dispatch methods on. See Details.
 #' @details Searches in a given R6 class for all public methods that are not 'initialize' or 'clone'.

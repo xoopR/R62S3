@@ -11,7 +11,7 @@
 #'
 #' In some cases a function may be defined without being a generic, if mask is TRUE then this function
 #' is masked by R62S3 and a generic is created with the same name. If mask is FALSE then this function
-#' is treaed like a generic and only the method is created.
+#' is treated like a generic and only the method is created.
 #'
 #' @return Assigns methods and generics to the chosen environment.
 #' @examples

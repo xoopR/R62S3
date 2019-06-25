@@ -29,7 +29,7 @@ Methods are created for every generic, following standard S3 convention.
 
 In some cases a function may be defined without being a generic, if mask is TRUE then this function
 is masked by R62S3 and a generic is created with the same name. If mask is FALSE then this function
-is treaed like a generic and only the method is created.
+is treated like a generic and only the method is created.
 }
 \examples{
 printMachine <- R6::R6Class("printMachine",

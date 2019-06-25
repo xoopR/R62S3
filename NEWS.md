@@ -1,4 +1,4 @@
-# R62S3 1.3.1.9000
+# R62S3 1.3.1
 
 * Added R62S4
   * Extends to R62S3 to generate S4 generics and methods instead

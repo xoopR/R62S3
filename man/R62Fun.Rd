@@ -11,9 +11,9 @@ R62Fun(R6Class, assignEnvir = parent.env(environment()),
 \arguments{
 \item{R6Class}{R6ClassGenerator to generate public methods from}
 
-\item{assignEnvir}{environment in which to assign the S4 generics/methods, default is parent of current environment.}
+\item{assignEnvir}{environment in which to assign the functions, default is parent of current environment.}
 
-\item{detectGeneric}{logical, if TRUE (default) detects if the method has a S3 generic and defines function accordingly}
+\item{detectGeneric}{logical, if TRUE (default) detects if the method has a S3 generic and defines functions accordingly}
 
 \item{mask}{logical, should the new method mask existing ones? See details.}
 
