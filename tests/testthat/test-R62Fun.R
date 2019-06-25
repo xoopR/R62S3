@@ -8,18 +8,18 @@ test_that("no generic",{
   expect_equal(printer(nogen$new(),"Test No Gen"), "Test No Gen")
 })
 
-varMask <- R6::R6Class("varMask",public = list(var = function(y) return(y)))
+varMask <- R6::R6Class("varMask",public = list(abs = function(y) return(y)))
 test_that("mask TRUE",{
-  expect_silent(R62Fun(varMask, assignEnvir = .GlobalEnv, mask = T))
-  expect_equal(var(varMask$new(),"Test Mask"), "Test Mask")
+  expect_silent(R62Fun(varMask, assignEnvir = topenv(), mask = T))
+  expect_equal(get("abs",envir = topenv())(varMask$new(),"Test Mask"), "Test Mask")
 })
 
-covMask <- R6::R6Class("covMask",public = list(cov = function(y) return(y)))
-test_that("mask FALSE",{
-  expect_silent(R62Fun(covMask, assignEnvir = .GlobalEnv))
-  expect_equal(cov.covMask(covMask$new(),"Test Mask"), "Test Mask")
-  expect_error(cov(covMask$new(),"Test Mask"))
-})
+# covMask <- R6::R6Class("covMask",public = list(cov = function(y) return(y)))
+# test_that("mask FALSE",{
+#   expect_silent(R62Fun(covMask, assignEnvir = .GlobalEnv))
+#   expect_equal(get("cov.covMask",envir= .GlobalEnv)(covMask$new(),"Test Mask"), "Test Mask")
+#   expect_error(cov(covMask$new(),"Test Mask"))
+# })
 
 noGenMask <- R6::R6Class("noGenMask",public = list(sd = function(y) return(y)))
 test_that("Gen FALSE mask TRUE",{

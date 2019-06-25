@@ -15,6 +15,11 @@ Local:
 * x86_64-w64-apple-darwin15.6.0 (64-bit); macOS Mojave 10.14.4; R 3.6.0
 * x86_64-w64-mingw32/x64 (64-bit); Windows 10 Home 64-bit; R 3.4.0
 
+check_win:
+* x86_64-w64_mingw32 (64-bit); R 3.5.3
+* x86_64-w64_mingw32 (64-bit); R 3.6.0
+* x86_64-w64_mingw32 (64-bit); R devel (2019-06-23 r76735)
+
 ## R CMD check results
 There were no ERRORs, WARNINGs or NOTEs.
 
