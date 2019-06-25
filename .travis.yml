@@ -2,7 +2,7 @@ language: r
 r:
   - oldrel
   - release
-  - devel
+ # - devel
 sudo: false
 dist: trusty
 
