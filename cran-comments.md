@@ -6,7 +6,7 @@
 * x86_64-w64-mingw32 (64-bit), R 3.6.0
 
 ## R CMD check results
-There were no ERRORs or WARNINGs.
+There were no ERRORs, WARNINGs or NOTEs.
 
 There was 1 NOTE:
 
