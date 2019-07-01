@@ -8,6 +8,7 @@
 [![CRAN Version](http://www.r-pkg.org/badges/version-ago/R62S3)](http://www.r-pkg.org/badges/version/R62S3)
 [![CRAN Summary](http://cranlogs.r-pkg.org/badges/grand-total/R62S3)](http://cranlogs.r-pkg.org/badges/grand-total/R62S3)
 [![CRAN Checks](https://cranchecks.info/badges/summary/R62S3)](https://cran.r-project.org/web/checks/check_results_R62S3.html)
+[![Dependencies](https://tinyverse.netlify.com/badge/R62S3)](https://CRAN.R-project.org/package=R62S3)
 
 ## What is R62S3?
 
