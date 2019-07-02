@@ -79,10 +79,7 @@ R62Fun <- function(R6Class, assignEnvir = parent.env(environment()),
       }
 
       for(j in 1:length(dispatchClasses)){
-        if(!generic)
-          arg1 <- "object"
-        else
-          arg1 <- names(arg1)[[1]]
+        arg1 <- ifnerror(generic, ifelse(!generic, "object", names(arg1)[[1]]), "object")
         x = alist(x=)
         names(x) = arg1
         value = function(){}
