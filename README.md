@@ -64,6 +64,10 @@ lapply(ls(name=parent.env(environment())),function(x){
   })
 ````
 
+### distr6 Use-Case
+
+To see `R62S3` check out the (distr6)[https://cran.r-project.org/web/packages/distr6/index.html] package (Sonabend and Kiraly, 2019). In `distr6` we use the `R62Fun` functions in our `zzz.R` file to generate S3 methods from specified R6 classes. This package also demonstrates how to document these functions.
+
 ## Installation
 
 For a stable release, install from CRAN
