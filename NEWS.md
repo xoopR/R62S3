@@ -1,60 +1,29 @@
-# R62S3 2.1.1.9000
-
-* Extended R62Fun to be able to detect for generics and define methods accordingly
-* Fixed bug in R62S3 that was erroneously finding generics
-
-# R62S3 2.0.1.9000
+# R62S3 1.3.2
 
 * Updated parameters of R62S4 and R62Fun
   * Now full control over where generics, methods and classes are assigned to (all to same environment)
+ * Extended R62Fun to be able to detect for generics and define methods accordingly
+* Fixed bug in R62S3 that was erroneously finding generics
 
-# R62S3 2.0.0.9000
+# R62S3 1.3.1
 
-* Big unexpected update! R62S3 has two new functions
-  * R62S4: Generate S4 generics and methods from R6 classes
-  * R62Fun: Generate functions only from R6 Classes
-
-# R62S3 1.4.2
-
-* Added better S3 generic/method compatibility by adding ... to method formals
-
-# R62S3 1.4.1
-
-* Bug fixes due to masking update
-
-# R62S3 1.4.0
-
-* Dispatch argument update!
-  * Previously generics were defined by the formals `generic(object,...)` and methods via dispatch were defined similarly. However this caused issues with documentation. Now methods automatically find the correct arguments from the R6 method and add them as formals.
-* Added mask parameter
-  * Gives the option to mask functions that are not generics but for which a dispatch method of the same name is required
-
-# R62S3 1.3.0
-* Changed the way a generic is defined to test for both errors "no function visible" and warnings "acts like an S3 but isn't"
-* Updated readme to reflect use of onAttach and as.environment("package:yourpkgname")
-
+* Added R62S4
+  * Extends to R62S3 to generate S4 generics and methods instead
+* Added R62Fun
+  * Generates functions and no generics, dispatch methods if generics are found
+* Edited R62S3
+  * Bug fixes in assignment
+  * Bug fixes in finding generics
+  * Adds functionality for masking
 
 # R62S3 1.2.1
 
-* Documentation update to match 1.1.0
-
-# R62S3 1.1.2
-
+* Released to CRAN!
 * Note Fix: Title to Title Case
-
-# R62S3 1.1.1
-
 * Bug Fix: Moved R6 from Imports to Suggests
-
-# R62S3 1.1.0
-
 * Removed unnecessary `getEnvir`
 * Simplified code by removing redundant conditional
 
-# R62S3 1.0.1
-
-Fixed errors in DESCRIPTION and docs.
-
 # R62S3 1.0.0
 
-Stable release onto GitHub.
+* Stable release onto GitHub.
