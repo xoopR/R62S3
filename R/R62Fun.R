@@ -73,9 +73,11 @@ R62Fun <- function(R6Class, assignEnvir = parent.env(environment()),
         if(generic)
           assignname = lapply(dispatchClasses, function(x) paste(names(methods)[[i]],x$classname,sep="."))
       } else if(!mask){
-        assignname = RSmisc::ifnerror(get(methodname),
-                                      lapply(dispatchClasses, function(x) paste(names(methods)[[i]],x$classname,sep=".")),
-                                      methodname)
+        x = get(methodname)
+        if(inherits(x) == "try-error")
+          assignname = methodname
+        else
+          lapply(dispatchClasses, function(x) paste(names(methods)[[i]],x$classname,sep="."))
       }
 
       for(j in 1:length(dispatchClasses)){
