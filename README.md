@@ -1,4 +1,4 @@
-# R62S3
+# R62S3 <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
 [![Travis Build Status](https://travis-ci.com/RaphaelS1/R62S3.svg?branch=master)](https://travis-ci.com/RaphaelS1/R62S3)
 [![Appveyor Build status](https://ci.appveyor.com/api/projects/status/olstl9l368ofl5el?svg=true)](https://ci.appveyor.com/project/RaphaelS1/r62s3)
