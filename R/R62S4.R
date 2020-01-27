@@ -10,9 +10,6 @@ R62S4 <- function(R6Class, dispatchClasses = list(R6Class),
                   assignEnvir = parent.env(environment()),
                   mask = FALSE, scope = "public", arg1 = "object", exclude = NULL){
 
-  checkmate::assert(inherits(R6Class,"R6ClassGenerator"),
-                    .var.name = "R6Class must be an R6ClassGenerator")
-
   methods = .getMethods(R6Class, scope, exclude)
 
   if(nrow(methods) > 0) {

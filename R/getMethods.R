@@ -1,4 +1,7 @@
 .getMethods <- function(class, scope, exclude) {
+
+  stopifnot(inherits(class,"R6ClassGenerator"))
+
   public = active = list()
 
   if("public" %in% scope)
