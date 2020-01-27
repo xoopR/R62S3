@@ -22,5 +22,5 @@ test_that("detect = TRUE, mask = FALSE",{
 test_that("detect = FALSE, mask = TRUE",{
   expect_silent(R62Fun(plotter, detectGeneric = FALSE, assignEnvir = topenv(), mask = TRUE))
   expect_equal(plot(plotter$new()), "I am plotting")
-  expect_equal(as.character(body(plot)[[2]])[[3]], "as.list(match.call())")
+  expect_equal(names(formals(plot))[[1]], "object")
 })
