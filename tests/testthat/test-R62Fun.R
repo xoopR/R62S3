@@ -6,7 +6,7 @@ test_that("no generic",{
   expect_silent(R62Fun(R62Fun_NoGeneric, assignEnvir = topenv(), exclude = "excluder", scope = c("public","active")))
   expect_equal(R62Funprinter(R62Fun_NoGeneric$new(), "Hello World"), "Hello World")
   expect_error(excluder(R62Fun_NoGeneric$new()))
-  expect_equal(R62FunStatus(R62Fun_NoGeneric$new()), "Printing")
+  expect_equal(R62FunStatusC(R62Fun_NoGeneric$new()), "Printing")
   expect_true(length(methods::.S4methods("R62Funprinter")) == 0)
   expect_error(utils::isS3stdGeneric("R62Funprinter"))
 })
