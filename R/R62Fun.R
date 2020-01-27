@@ -20,7 +20,7 @@ R62Fun <- function(R6Class, assignEnvir = parent.env(environment()),
                                                       arg1 = rep(arg1, nrow(methods))))
     }
 
-    if(mask){
+    if(mask)
       invisible(.assignMethods(.getBody(methods), "fun", assignEnvir, R6Class$classname, TRUE))
     else
       invisible(.assignMethods(.getBody(methods), "fun", assignEnvir,
