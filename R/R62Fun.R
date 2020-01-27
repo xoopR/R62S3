@@ -13,14 +13,14 @@ R62Fun <- function(R6Class, assignEnvir = parent.env(environment()),
 
   if(nrow(methods) > 0){
 
-  if(detectGeneric) {
-    methods = .detectGeneric(methods, type = c("S3","S4"), mask, arg1)
-  } else {
-    methods = cbind(methods, data.table::data.table(generic = logical(nrow(methods)),
-                                                    arg1 = rep(arg1, nrow(methods))))
-  }
+    if(detectGeneric) {
+      methods = .detectGeneric(methods, type = c("S3","S4"), mask, arg1)
+    } else {
+      methods = cbind(methods, data.table::data.table(generic = logical(nrow(methods)),
+                                                      arg1 = rep(arg1, nrow(methods))))
+    }
 
-    if(mask)
+    if(mask){
       invisible(.assignMethods(.getBody(methods), "fun", assignEnvir, R6Class$classname, TRUE))
     else
       invisible(.assignMethods(.getBody(methods), "fun", assignEnvir,
