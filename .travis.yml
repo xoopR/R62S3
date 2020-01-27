@@ -3,8 +3,6 @@ language: r
 os:
  - linux
  - osx
-    
-sudo: false
 
 dist: xenial
 
@@ -24,9 +22,9 @@ after_success:
       
 deploy:
   provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_PAT
-  keep-history: false
-  local-dir: docs
+  skip_cleanup: true
+  token: $GITHUB_PAT
+  keep_history: false
+  local_dir: docs
   on:
     branch: master
