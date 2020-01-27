@@ -70,12 +70,12 @@ To see `R62S3` in action, check out the [distr6](https://CRAN.R-project.org/pack
 
 ## Installation
 
-For a stable release, install from CRAN
+Install from CRAN with
 ````R
 install.packages("R62S3")
 ````
 
-Or install the latest build from GitHub with
+Or the latest stable build from GitHub with
 
 ````R
 remotes::install_github("RaphaelS1/R62S3")
