@@ -52,7 +52,7 @@ already exist. Methods and generics are created using standard convention.
 The optional \code{dispatchClasses} argument takes a list of \link[R6:R6Class]{R6::R6Class}es and allows methods to be
 created for multiple classes at one time.
 
-S3 generics are detected with \link[utils:isS3stdGeneric]{utils::isS3stdGeneric} and S4 generics are detected with \link[methods:.S4Methods]{methods::.S4Methods}.
+S3 generics are detected with \link[utils:isS3stdGeneric]{utils::isS3stdGeneric} and S4 generics are detected with \link[methods:.S4methods]{methods::.S4methods}.
 }
 \examples{
 printMachine <- R6::R6Class("printMachine",

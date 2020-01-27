@@ -1,7 +1,7 @@
 #' @template R62
 #' @templateVar type functions
 #' @param detectGeneric logical, if TRUE (default) detects if the method has a S3 or S4 generic and defines functions accordingly
-#' @details S3 generics are detected with [utils::isS3stdGeneric] and S4 generics are detected with [methods::.S4Methods].
+#' @details S3 generics are detected with [utils::isS3stdGeneric] and S4 generics are detected with [methods::.S4methods].
 #'
 #' @export
 R62Fun <- function(R6Class, assignEnvir = parent.env(environment()),

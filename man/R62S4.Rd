@@ -51,7 +51,7 @@ already exist. Methods and generics are created using standard convention.
 The optional \code{dispatchClasses} argument takes a list of \link[R6:R6Class]{R6::R6Class}es and allows methods to be
 created for multiple classes at one time.
 
-S4 generics are detected with \link[methods:.S4Methods]{methods::.S4Methods}.
+S4 generics are detected with \link[methods:.S4methods]{methods::.S4methods}.
 }
 \examples{
 printMachine <- R6::R6Class("printMachine",
@@ -73,7 +73,7 @@ print.printMachine(pm)
 print(pm)
 }
 \seealso{
-\link{setMethod} \link{setGeneric}
+\link[methods:setMethod]{methods::setMethod} \link[methods:setGeneric]{methods::setGeneric}
 
 Other R62s: 
 \code{\link{R62Fun}()},
