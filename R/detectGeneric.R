@@ -56,7 +56,7 @@
     #   }
     # }
     #
-    return(list(generic = FALSE, arg = arg1))
+    return(list(generic = FALSE, arg1 = arg1))
   })
 
   cbind(data.table::data.table(methods), data.table::rbindlist(generic))
