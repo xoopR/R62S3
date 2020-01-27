@@ -11,4 +11,4 @@
 There were no ERRORs, WARNINGs or NOTEs.
 
 ## Downstream dependencies
-There are currently no downstream dependencies for this package.
+All reverse dependencies checked and OK.
