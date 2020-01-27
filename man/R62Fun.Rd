@@ -58,20 +58,20 @@ S3 generics are detected with \code{\link[utils:isS3stdGeneric]{utils::isS3stdGe
 printMachine <- R6::R6Class("printMachine",
         public = list(initialize = function() {},
                       printer = function(str) print(str)),
-        active = list(print = function() "Printing"))
+        active = list(Status = function() "Printing"))
 
 pm <- printMachine$new()
 
 # scope = public
-
 R62Fun(printMachine, assignEnvir = topenv())
 printer(pm, "Test String B")
 
-# mask = FALSE, scope = active
+# scope = active
 R62Fun(printMachine, assignEnvir = topenv(), scope = 'active')
-# note support for accessing only, cannot assign values to an active binding
-print.printMachine(pm)
-print(pm)
+
+# note support for accessing only, cannot assign
+# values to an active binding
+Status(pm)
 }
 \seealso{
 Other R62s: 

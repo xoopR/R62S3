@@ -57,20 +57,20 @@ S4 generics are detected with \code{\link[methods:.S4methods]{methods::.S4method
 printMachine <- R6::R6Class("printMachine",
         public = list(initialize = function() {},
                       printer = function(str) print(str)),
-        active = list(print = function() "Printing"))
+        active = list(Status = function() "Printing"))
 
 pm <- printMachine$new()
 
 # scope = public
-
 R62S4(printMachine, assignEnvir = topenv())
 printer(pm, "Test String B")
 
-# mask = FALSE, scope = active
+# scope = active
 R62S4(printMachine, assignEnvir = topenv(), scope = 'active')
-# note support for accessing only, cannot assign values to an active binding
-print.printMachine(pm)
-print(pm)
+
+# note support for accessing only, cannot assign
+# values to an active binding
+Status(pm)
 }
 \seealso{
 \link[methods:setMethod]{methods::setMethod} \link[methods:setGeneric]{methods::setGeneric}
