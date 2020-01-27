@@ -1,33 +1,36 @@
 language: r
-r:
-  - oldrel
-  - release
- # - devel
-sudo: false
-dist: trusty
-
-os:
-  - linux
-  - osx
   
-latex: true
+  
+matrix:
+    include:
+        - os: linux
+          r: release
+        - os: osx
+          r: release
+    
+sudo: false
 
-warnings_are_errors: false
+dist: xenial
 
 cache: packages
+
+latex: true
+
+r_github_packages:
+  - r-lib/pkgdown
   
 r_packages:
   - covr
      
 after_success:
-  - Rscript -e 'library(covr); codecov()'
   - Rscript -e 'pkgdown::build_site()'
-  
+  - Rscript -e 'library(covr); codecov()'
+      
 deploy:
   provider: pages
   skip-cleanup: true
   github-token: $GITHUB_PAT
-  keep-history: true
+  keep-history: false
   local-dir: docs
   on:
     branch: master
