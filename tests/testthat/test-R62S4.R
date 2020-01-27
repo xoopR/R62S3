@@ -10,12 +10,15 @@ test_that("no generic",{
   expect_equal(printer(nogen$new(),"Test No Gen"), "Test No Gen")
 })
 
-gen <- R6::R6Class("gen",public = list(print = function(y) print(y)))
+methods::setGeneric("s4print",
+                    def = function(object, ...){},
+                    where = topenv())
+gen <- R6::R6Class("gen",public = list(s4print = function(y) print(y)))
 test_that("generic",{
   expect_silent(R62S4(gen, assignEnvir = topenv()))
-  expect_equal(print(gen$new(), "Test Gen"), "Test Gen")
-  expect_true(isGeneric("print"))
-  expect_true(any(grepl("gen",methods("printer"))))
+  expect_equal(s4print(gen$new(), "Test Gen"), "Test Gen")
+  expect_true(isGeneric("s4print"))
+  expect_true(any(grepl("gen",methods("s4print"))))
 })
 
 # masker <- R6::R6Class("masker",public = list(pdf = function() return("Test masker")))
