@@ -12,7 +12,7 @@ test_that("no generic",{
 
 methods::setGeneric("s4print",
                     def = function(object, ...){},
-                    where = topenv())
+                    where = .GlobalEnv)
 gen <- R6::R6Class("gen",public = list(s4print = function(y) print(y)))
 test_that("generic",{
   expect_silent(R62S4(gen, assignEnvir = topenv()))
