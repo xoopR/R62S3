@@ -8,7 +8,7 @@
     value = function(){}
     x = alist(x=)
     names(x) = amethod[[5]]
-    formals(value) = c(x,formals(amethod[[2]]),alist(...=))
+    formals(value) = c(x,formals(amethod[[2]]))
     body(value) = amethod[[6]][[1]]
     if(type %in% c("S3", "fun"))
       sapply(method, function(x) assign(paste0(x), value, envir = assignEnvir))
