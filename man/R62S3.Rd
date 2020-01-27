@@ -30,7 +30,7 @@ R62S3(
 \item{exclude}{an optional character vector naming the public methods or active bindings to exclude from the generator}
 }
 \value{
-None. Assigns generics/methods/functions to the chosen environment.
+Assigns generics/methods/functions to the chosen environment.
 }
 \description{
 Auto-generates S3 generics from an R6 Class.
@@ -49,7 +49,7 @@ already exist. Methods and generics are created using standard convention.
 The optional \code{dispatchClasses} argument takes a list of \link[R6:R6Class]{R6::R6Class}es and allows methods to be
 created for multiple classes at one time.
 
-S3 generics are detected with \link[utils:isS3stdGeneric]{utils::isS3stdGeneric}.
+S3 generics are detected with \code{\link[utils:isS3stdGeneric]{utils::isS3stdGeneric()}}.
 }
 \examples{
 printMachine <- R6::R6Class("printMachine",

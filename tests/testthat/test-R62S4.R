@@ -27,7 +27,7 @@ test_that("generic",{
 masker <- R6::R6Class("masker",public = list(pdf = function() return("Test masker")))
 
 test_that("mask TRUE",{
-  expect_message(R62S4(masker, mask = TRUE, assignEnvir = topenv()))
+  expect_silent(R62S4(masker, mask = TRUE, assignEnvir = topenv()))
   expect_equal(pdf(masker$new()), "Test masker")
 })
 

@@ -1,6 +1,6 @@
 #' @template R62
 #' @templateVar type S3
-#' @details S3 generics are detected with [utils::isS3stdGeneric].
+#' @details S3 generics are detected with [utils::isS3stdGeneric()].
 #' @export
 R62S3 <- function(R6Class, dispatchClasses = list(R6Class),
                   assignEnvir = parent.env(environment()), mask = FALSE,

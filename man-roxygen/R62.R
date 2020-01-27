@@ -20,7 +20,7 @@
 #' The optional `dispatchClasses` argument takes a list of [R6::R6Class]es and allows methods to be
 #' created for multiple classes at one time.
 #'
-#' @return None. Assigns generics/methods/functions to the chosen environment.
+#' @return Assigns generics/methods/functions to the chosen environment.
 #' @family R62s
 #' @examples
 #' printMachine <- R6::R6Class("printMachine",

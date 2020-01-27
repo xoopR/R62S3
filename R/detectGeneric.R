@@ -5,9 +5,17 @@
     generic = FALSE
 
     if(!mask){
-      if(("S3" %in% type & utils::isS3stdGeneric(methodname)) |
-         ("S4" %in% type & length(methods::.S4methods(methodname)) > 0)){
+      if("S3" %in% type) {
+        x = try(utils::isS3stdGeneric(methodname), silent = TRUE)
+        if(x == TRUE) {
+            return(list(generic = TRUE, arg1 = names(formals(args(get(methodname)))[1])))
+        }
+      }
+
+      if("S4" %in% type) {
+        if(length(methods::.S4methods(methodname)) > 0) {
           return(list(generic = TRUE, arg1 = names(formals(args(get(methodname)))[1])))
+        }
       }
     }
 

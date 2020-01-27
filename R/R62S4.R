@@ -1,6 +1,6 @@
 #' @template R62
 #' @templateVar type S4
-#' @details S4 generics are detected with [methods::.S4methods].
+#' @details S4 generics are detected with [methods::.S4methods()].
 #'
 #' @return Assigns methods and generics to the chosen environment.
 #'

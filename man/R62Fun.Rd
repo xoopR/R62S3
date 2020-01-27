@@ -33,7 +33,7 @@ R62Fun(
 \item{exclude}{an optional character vector naming the public methods or active bindings to exclude from the generator}
 }
 \value{
-None. Assigns generics/methods/functions to the chosen environment.
+Assigns generics/methods/functions to the chosen environment.
 }
 \description{
 Auto-generates functions  from an R6 Class.
@@ -52,7 +52,7 @@ already exist. Methods and generics are created using standard convention.
 The optional \code{dispatchClasses} argument takes a list of \link[R6:R6Class]{R6::R6Class}es and allows methods to be
 created for multiple classes at one time.
 
-S3 generics are detected with \link[utils:isS3stdGeneric]{utils::isS3stdGeneric} and S4 generics are detected with \link[methods:.S4methods]{methods::.S4methods}.
+S3 generics are detected with \code{\link[utils:isS3stdGeneric]{utils::isS3stdGeneric()}} and S4 generics are detected with \code{\link[methods:.S4methods]{methods::.S4methods()}}.
 }
 \examples{
 printMachine <- R6::R6Class("printMachine",
