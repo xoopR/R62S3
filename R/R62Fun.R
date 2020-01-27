@@ -1,98 +1,32 @@
-#' Method Generator from R6 Class
-#'
-#' @description Auto-generates methods from an R6 Class.
-#' @param R6Class R6ClassGenerator to generate public methods from
-#' @param assignEnvir environment in which to assign the functions, default is parent of current environment.
-#' @param detectGeneric logical, if TRUE (default) detects if the method has a S3 generic and defines functions accordingly
-#' @param mask logical, should the new method mask existing ones? See details.
-#' @param dispatchClasses list of classes to assign S3 dispatch methods on. See Details.
-#' @details Searches in a given R6 class for all public methods that are not 'initialize' or 'clone'.
-#' Creates a function to call each of the R6 methods.
-#'
-#' Additional parameters allow the user to specify if a generic function should be detected. If so
-#' then a dispatch method is created instead of a standard function. The \code{mask} parameter determines
-#' if masking should occur, if TRUE then the function is created even if one of the same name
-#' exists, if FALSE then the function name is appended with ".ClassName" like a dispatch method.
-#'
-#' If \code{mask = FALSE} or \code{detectGeneric = TRUE}, \code{dispatchClasses} specifies what class
-#' the method should be associated with, i.e. \code{method.ClassName}.
-#'
-#' @return Assigns methods to the chosen environment.
-#' @examples
-#' printMachine <- R6::R6Class("printMachine",
-#'public = list(initialize = function() {},
-#'printer = function(str) {print(str)}))
-#' pm <- printMachine$new()
-#' R62Fun(printMachine, assignEnvir = .GlobalEnv)
-#' pm$printer("Test String A")
-#' printer(pm, "Test String B")
+#' @template R62
+#' @templateVar type functions
+#' @param detectGeneric logical, if TRUE (default) detects if the method has a S3 or S4 generic and defines functions accordingly
+#' @details S3 generics are detected with [utils::isS3stdGeneric] and S4 generics are detected with [methods::.S4Methods].
 #'
 #' @export
 R62Fun <- function(R6Class, assignEnvir = parent.env(environment()),
                    detectGeneric = TRUE, mask = FALSE,
-                   dispatchClasses = list(R6Class)){
+                   dispatchClasses = list(R6Class),
+                   scope = "public", arg1 = "object", exclude = NULL){
 
   checkmate::assert(inherits(R6Class,"R6ClassGenerator"),
                     .var.name = "R6Class must be an R6ClassGenerator")
 
-  obj = R6Class
-  methods = obj$public_methods[!(names(obj$public_methods) %in% c("initialize","clone"))]
+  methods = .getMethods(R6Class, scope, exclude)
 
-  if(!detectGeneric & mask)
-    dispatchClasses = list(R6Class)
+  if(nrow(methods) > 0){
 
-  if(length(methods)>0){
-    for(i in 1:length(methods)){
-      methodname = names(methods)[[i]]
-      assignname = methodname
+  if(detectGeneric) {
+    methods = .detectGeneric(methods, type = c("S3","S4"), mask, arg1)
+  } else {
+    methods = cbind(methods, data.table::data.table(generic = logical(nrow(methods)),
+                                                    arg1 = rep(arg1, nrow(methods))))
+  }
 
-      if(detectGeneric){
-        generic = FALSE
-        if(mask){
-          x = tryCatch(methods(methodname),warning = function(w) w, error = function(e) e)
-          if(inherits(x, "condition")){
-            if(!grepl("appears not to be S3 generic",x$message) & !inherits(x, "error")){
-              generic = TRUE
-              arg1 = formals(get(methodname))[1]
-            }
-          } else if(length(x)!=0){
-            generic = TRUE
-            arg1 = formals(get(methodname))[1]
-          }
-
-        } else{
-          x = suppressWarnings(suppressMessages((try(methods(methodname),silent=T))))
-          if(class(x)!="try-error"){
-            if(length(x) > 0){
-              generic = TRUE
-              arg1 = formals(get(methodname))[1]
-            }
-          }
-        }
-
-        if(generic)
-          assignname = lapply(dispatchClasses, function(x) paste(names(methods)[[i]],x$classname,sep="."))
-      } else if(!mask){
-        assignname = ifnerror(get(methodname),
-                              lapply(dispatchClasses, function(x) paste(names(methods)[[i]],x$classname,sep=".")),
-                               methodname)
-      }
-
-      for(j in 1:length(dispatchClasses)){
-        arg1 <- ifnerror(generic, ifelse(!generic, "object", names(arg1)[[1]]), "object")
-        x = alist(x=)
-        names(x) = arg1
-        value = function(){}
-        formals(value) = c(x, formals(methods[[i]]))
-        body(value) = substitute({
-          args = as.list(match.call())
-          args[[1]] = NULL
-          args$object = NULL
-          do.call(get(object)[[method]], args)
-        },list(method=methodname[[j]], object = arg1))
-        assign(assignname[[j]], value, envir = assignEnvir)
-      }
-
-    }
+    if(mask)
+      invisible(.assignMethods(.getBody(methods), "fun", assignEnvir, R6Class$classname, TRUE))
+    else
+      invisible(.assignMethods(.getBody(methods), "fun", assignEnvir,
+                               sapply(dispatchClasses, function(x) x$classname)))
   }
 }
