@@ -9,3 +9,4 @@ CODE_OF_CONDUCT.md
 ^\.Rproj\.user$
 \_pkgdown\.yml
 pkgdown
+man-roxygen

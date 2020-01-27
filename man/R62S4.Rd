@@ -63,11 +63,11 @@ pm <- printMachine$new()
 
 # scope = public
 
-R62S4(printMachine, assignEnvir = .GlobalEnv)
+R62S4(printMachine, assignEnvir = topenv())
 printer(pm, "Test String B")
 
 # mask = FALSE, scope = active
-R62S4(printMachine, assignEnvir = .GlobalEnv, scope = 'active')
+R62S4(printMachine, assignEnvir = topenv(), scope = 'active')
 # note support for accessing only, cannot assign values to an active binding
 print.printMachine(pm)
 print(pm)

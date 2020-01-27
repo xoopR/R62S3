@@ -32,11 +32,11 @@
 #'
 #' # scope = public
 #'
-#' <%= if(type %in% c("S3", "S4")) paste0("R62", type, "(printMachine, assignEnvir = .GlobalEnv)") else "R62Fun(printMachine, assignEnvir = .GlobalEnv)" %>
+#' <%= if(type %in% c("S3", "S4")) paste0("R62", type, "(printMachine, assignEnvir = topenv())") else "R62Fun(printMachine, assignEnvir = topenv())" %>
 #' printer(pm, "Test String B")
 #'
 #' # mask = FALSE, scope = active
-#' <%= if(type %in% c("S3", "S4")) paste0("R62", type, "(printMachine, assignEnvir = .GlobalEnv, scope = 'active')") else "R62Fun(printMachine, assignEnvir = .GlobalEnv, scope = 'active')" %>
+#' <%= if(type %in% c("S3", "S4")) paste0("R62", type, "(printMachine, assignEnvir = topenv(), scope = 'active')") else "R62Fun(printMachine, assignEnvir = topenv(), scope = 'active')" %>
 #' # note support for accessing only, cannot assign values to an active binding
 #' print.printMachine(pm)
 #' print(pm)
