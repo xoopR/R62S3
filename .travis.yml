@@ -5,6 +5,8 @@ matrix:
     include:
         - os: linux
           r: release
+        - os: osx
+          r: release
     
 sudo: false
 
