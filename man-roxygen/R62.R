@@ -8,13 +8,13 @@
 #' @param arg1 if `mask == TRUE` or no generic is found, then `arg1` determines what name to give to the first argument in the generic.
 #' @param exclude an optional character vector naming the public methods or active bindings to exclude from the generator
 #' @details If `scope == "public"` then searches in a given [R6::R6Class] for all public methods that are not `initialize` or `clone`.
-#' If `scope == "active"` then searches for all active bindings. Currenty there is only support for
+#' If `scope == "active"` then searches for all active bindings. Currently there is only support for
 #' calling active bindings but not setting them. If `scope == c("public", active")` then both are included.
 #' Any methods/bindings passed to `exclude` will be ignored in the search.
 #'
 #' If `mask == TRUE` then the generator ignores if a generic or method of the same name exists and will
 #' create a new <%= if(type %in% c("S3", "S4")) paste(type, "generic/method") else "function"%>. If
-#' `mask == FALSE` then the generator will create a new generic only if an existic generic does not
+#' `mask == FALSE` then the generator will create a new generic only if an existing generic does not
 #' already exist. Methods and generics are created using standard convention.
 #'
 #' The optional `dispatchClasses` argument takes a list of [R6::R6Class]es and allows methods to be

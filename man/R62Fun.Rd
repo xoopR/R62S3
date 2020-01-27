@@ -40,13 +40,13 @@ Auto-generates functions  from an R6 Class.
 }
 \details{
 If \code{scope == "public"} then searches in a given \link[R6:R6Class]{R6::R6Class} for all public methods that are not \code{initialize} or \code{clone}.
-If \code{scope == "active"} then searches for all active bindings. Currenty there is only support for
+If \code{scope == "active"} then searches for all active bindings. Currently there is only support for
 calling active bindings but not setting them. If \verb{scope == c("public", active")} then both are included.
 Any methods/bindings passed to \code{exclude} will be ignored in the search.
 
 If \code{mask == TRUE} then the generator ignores if a generic or method of the same name exists and will
 create a new function. If
-\code{mask == FALSE} then the generator will create a new generic only if an existic generic does not
+\code{mask == FALSE} then the generator will create a new generic only if an existing generic does not
 already exist. Methods and generics are created using standard convention.
 
 The optional \code{dispatchClasses} argument takes a list of \link[R6:R6Class]{R6::R6Class}es and allows methods to be

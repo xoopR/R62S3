@@ -83,4 +83,4 @@ remotes::install_github("RaphaelS1/R62S3")
 
 ### Acknowledgements
 Dr Franz Kiraly for initial discussions about the idea. <br>
-Prof. Dr. Peter Ruckdeschel for conversations that lead to a simplification in the code structure.
+Prof. Dr. Peter Ruckdeschel for conversations that lead to a simplification in the code structure in earlier versions.
