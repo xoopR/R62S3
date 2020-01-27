@@ -1,5 +1,10 @@
-lower = function(object, ...) UseMethod(lower, object)
-methods::setGeneric("upper", function(object, ...){}, where = .GlobalEnv)
+R62S3lower = function(object, ...) UseMethod("R62S3lower", object)
+R62S4lower = function(object, ...) UseMethod("R62S4lower", object)
+R62Funlower = function(object, ...) UseMethod("R62Funlower", object)
+
+methods::setGeneric("R62S3upper", function(object, ...){}, where = .GlobalEnv)
+methods::setGeneric("R62S4upper", function(object, ...){}, where = .GlobalEnv)
+methods::setGeneric("R62Funupper", function(object, ...){}, where = .GlobalEnv)
 
 for (i in c("R62S3", "R62S4", "R62Fun")) {
   assign(paste(i, "S3Generic", sep = "_"),
