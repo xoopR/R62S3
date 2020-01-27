@@ -22,5 +22,5 @@ test_that("detect = TRUE, mask = FALSE",{
 test_that("detect = FALSE, mask = TRUE",{
   expect_silent(R62Fun(plotter, detectGeneric = FALSE, assignEnvir = topenv()))
   expect_equal(plot(plotter$new()), "I am plotting")
-  expect_false(isS3stdGeneric("plot"))
+  # expect_false(isS3stdGeneric("plot"))
 })
