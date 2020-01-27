@@ -1,10 +1,8 @@
 language: r
-  
-  
-matrix:
-    include:
-        - os: linux
-          r: release
+
+os:
+ - linux
+ - osx
     
 sudo: false
 
