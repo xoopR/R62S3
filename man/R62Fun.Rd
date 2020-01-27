@@ -4,46 +4,78 @@
 \alias{R62Fun}
 \title{Method Generator from R6 Class}
 \usage{
-R62Fun(R6Class, assignEnvir = parent.env(environment()),
-  detectGeneric = TRUE, mask = FALSE,
-  dispatchClasses = list(R6Class))
+R62Fun(
+  R6Class,
+  assignEnvir = parent.env(environment()),
+  detectGeneric = TRUE,
+  mask = FALSE,
+  dispatchClasses = list(R6Class),
+  scope = "public",
+  arg1 = "object",
+  exclude = NULL
+)
 }
 \arguments{
 \item{R6Class}{R6ClassGenerator to generate public methods from}
 
-\item{assignEnvir}{environment in which to assign the functions, default is parent of current environment.}
+\item{assignEnvir}{environment in which to assign the generics/methods, default is parent of current environment.}
 
-\item{detectGeneric}{logical, if TRUE (default) detects if the method has a S3 generic and defines functions accordingly}
+\item{detectGeneric}{logical, if TRUE (default) detects if the method has a S3 or S4 generic and defines functions accordingly}
 
-\item{mask}{logical, should the new method mask existing ones? See details.}
+\item{mask}{logical, determines if non-generic functions should be masked if found, see details.}
 
-\item{dispatchClasses}{list of classes to assign S3 dispatch methods on. See Details.}
+\item{dispatchClasses}{list of classes to assign dispatch methods on}
+
+\item{scope}{determines the scope of methods that should be copied, either \code{"public"}, \code{"active"} or both}
+
+\item{arg1}{if \code{mask == TRUE} or no generic is found, then \code{arg1} determines what name to give to the first argument in the generic.}
+
+\item{exclude}{an optional character vector naming the public methods or active bindings to exclude from the generator}
 }
 \value{
-Assigns methods to the chosen environment.
+Assigns generics/methods/functions to the chosen environment.
 }
 \description{
-Auto-generates methods from an R6 Class.
+Auto-generates functions  from an R6 Class.
 }
 \details{
-Searches in a given R6 class for all public methods that are not 'initialize' or 'clone'.
-Creates a function to call each of the R6 methods.
+If \code{scope == "public"} then searches in a given \link[R6:R6Class]{R6::R6Class} for all public methods that are not \code{initialize} or \code{clone}.
+If \code{scope == "active"} then searches for all active bindings. Currenty there is only support for
+calling active bindings but not setting them. If \verb{scope == c("public", active")} then both are included.
+Any methods/bindings passed to \code{exclude} will be ignored in the search.
 
-Additional parameters allow the user to specify if a generic function should be detected. If so
-then a dispatch method is created instead of a standard function. The \code{mask} parameter determines
-if masking should occur, if TRUE then the function is created even if one of the same name
-exists, if FALSE then the function name is appended with ".ClassName" like a dispatch method.
+If \code{mask == TRUE} then the generator ignores if a generic or method of the same name exists and will
+create a new function. If
+\code{mask == FALSE} then the generator will create a new generic only if an existic generic does not
+already exist. Methods and generics are created using standard convention.
 
-If \code{mask = FALSE} or \code{detectGeneric = TRUE}, \code{dispatchClasses} specifies what class
-the method should be associated with, i.e. \code{method.ClassName}.
+The optional \code{dispatchClasses} argument takes a list of \link[R6:R6Class]{R6::R6Class}es and allows methods to be
+created for multiple classes at one time.
+
+S3 generics are detected with \code{\link[utils:isS3stdGeneric]{utils::isS3stdGeneric()}} and S4 generics are detected with \code{\link[methods:.S4methods]{methods::.S4methods()}}.
 }
 \examples{
 printMachine <- R6::R6Class("printMachine",
-public = list(initialize = function() {},
-printer = function(str) {print(str)}))
+        public = list(initialize = function() {},
+                      printer = function(str) print(str)),
+        active = list(Status = function() "Printing"))
+
 pm <- printMachine$new()
-R62Fun(printMachine, assignEnvir = .GlobalEnv)
-pm$printer("Test String A")
+
+# scope = public
+R62Fun(printMachine, assignEnvir = topenv())
 printer(pm, "Test String B")
 
+# scope = active
+R62Fun(printMachine, assignEnvir = topenv(), scope = 'active')
+
+# note support for accessing only, cannot assign
+# values to an active binding
+Status(pm)
 }
+\seealso{
+Other R62s: 
+\code{\link{R62S3}()},
+\code{\link{R62S4}()}
+}
+\concept{R62s}

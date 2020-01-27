@@ -5,3 +5,8 @@ cran-comments.md
 docs
 CODE_OF_CONDUCT.md
 .github
+^.*\.Rproj$
+^\.Rproj\.user$
+\_pkgdown\.yml
+pkgdown
+man-roxygen

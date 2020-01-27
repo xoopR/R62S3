@@ -2,29 +2,25 @@ library(testthat)
 
 context("R62Fun")
 
-nogen <- R6::R6Class("nogen",public = list(printer = function(y) print(y)))
 test_that("no generic",{
-  expect_silent(R62Fun(nogen, assignEnvir = topenv()))
-  expect_equal(printer(nogen$new(),"Test No Gen"), "Test No Gen")
+  expect_silent(R62Fun(R62Fun_NoGeneric, assignEnvir = topenv(), exclude = "excluder", scope = c("public","active")))
+  expect_equal(R62Funprinter(R62Fun_NoGeneric$new(), "Hello World"), "Hello World")
+  expect_error(excluder(R62Fun_NoGeneric$new()))
+  expect_equal(R62FunStatusC(R62Fun_NoGeneric$new()), "Printing")
+  expect_true(length(methods::.S4methods("R62Funprinter")) == 0)
+  expect_error(utils::isS3stdGeneric("R62Funprinter"))
 })
 
-varMask <- R6::R6Class("varMask",public = list(abs = function(y) return(y)))
-test_that("mask TRUE",{
-  expect_silent(R62Fun(varMask, assignEnvir = topenv(), mask = T))
-  expect_equal(get("abs",envir = topenv())(varMask$new(),"Test Mask"), "Test Mask")
+plotter <- R6::R6Class("plotter", public = list(plot = function() return("I am plotting")))
+
+test_that("detect = TRUE, mask = FALSE",{
+  expect_silent(R62Fun(plotter, detectGeneric = TRUE, mask = FALSE, assignEnvir = topenv()))
+  expect_equal(plot(plotter$new()), "I am plotting")
+  expect_equal(find("plot"), "package:graphics")
 })
 
-# covMask <- R6::R6Class("covMask",public = list(cov = function(y) return(y)))
-# test_that("mask FALSE",{
-#   expect_silent(R62Fun(covMask, assignEnvir = .GlobalEnv))
-#   expect_equal(get("cov.covMask",envir= .GlobalEnv)(covMask$new(),"Test Mask"), "Test Mask")
-#   expect_error(cov(covMask$new(),"Test Mask"))
-# })
-
-noGenMask <- R6::R6Class("noGenMask",public = list(sd = function(y) return(y)))
-test_that("Gen FALSE mask TRUE",{
-  expect_silent(R62Fun(noGenMask, assignEnvir = topenv(),
-                detectGeneric = T, mask = T))
-  expect_equal(sd(noGenMask$new(),"Test Mask"), "Test Mask")
-  expect_error(sd.noGenMask(noGenMask$new()))
+test_that("detect = FALSE, mask = TRUE",{
+  expect_silent(R62Fun(plotter, detectGeneric = FALSE, assignEnvir = topenv(), mask = TRUE))
+  expect_equal(plot(plotter$new()), "I am plotting")
+  expect_equal(names(formals(plot))[[1]], "object")
 })

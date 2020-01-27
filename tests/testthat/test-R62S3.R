@@ -2,50 +2,19 @@ library(testthat)
 
 context("R62S3")
 
-nogen <- R6::R6Class("nogen",public = list(printer = function() return("Test No Gen")))
 test_that("no generic",{
-  expect_silent(R62S3(nogen, assignEnvir = .GlobalEnv))
-  expect_equal(printer(nogen$new()), "Test No Gen")
-  expect_silent(get("printer"))
-  expect_silent(get("printer.nogen"))
+  expect_error(isS3stdGeneric("R62S3printer"))
+  expect_silent(R62S3(R62S3_NoGeneric, assignEnvir = topenv(), exclude = "excluder", scope = c("public","active")))
+  expect_equal(R62S3printer(R62S3_NoGeneric$new(), "Hello World"), "Hello World")
+  expect_error(excluder(R62S3_NoGeneric$new()))
+  expect_equal(R62S3StatusC(R62S3_NoGeneric$new()), "Printing")
+  # expect_true(isS3stdGeneric("R62S3printer"))
 })
 
-gen <- R6::R6Class("gen",public = list(print = function() return("Test Gen")))
-
-test_that("generic",{
-  expect_silent(R62S3(gen, assignEnvir = .GlobalEnv))
-  expect_equal(print(gen$new()), "Test Gen")
-  expect_silent(get("print.gen"))
-  expect_silent(get("print"))
-})
-
-# masker <- R6::R6Class("masker",public = list(abs = function() return("Test masker")))
-#
-# test_that("mask FALSE",{
-#   expect_silent(R62S3(masker, assignEnvir = .GlobalEnv, mask = FALSE))
-#   expect_equal(abs.masker(masker$new()), "Test masker")
-# })
-
-masker <- R6::R6Class("masker",public = list(pdf = function() return("Test masker")))
-
-test_that("mask TRUE gen",{
-  expect_silent(R62S3(masker, assignEnvir = .GlobalEnv, mask = TRUE))
-  expect_equal(pdf(masker$new()), "Test masker")
-  expect_equal(pdf.masker(masker$new()), "Test masker")
-})
-
-printer <- R6::R6Class("masker",public = list(print = function() return("Test printer")))
-
-test_that("mask TRUE s3gen",{
-  expect_silent(R62S3(printer, assignEnvir = .GlobalEnv, mask = TRUE))
-  expect_equal(print(printer$new()), "Test printer")
-  expect_equal(print.masker(printer$new()), "Test printer")
-})
-
-printer <- R6::R6Class("printer",public = list(prints = function() return("Test printer")))
-
-test_that("mask TRUE no gen",{
-  expect_silent(R62S3(printer, assignEnvir = .GlobalEnv, mask = TRUE))
-  expect_equal(prints(printer$new()), "Test printer")
-  expect_equal(prints.printer(printer$new()), "Test printer")
+test_that("S3 generic",{
+  # expect_true(isS3stdGeneric("R62S3lower"))
+  expect_silent(R62S3(R62S3_S3Generic, assignEnvir = topenv(), exclude = "excluder", scope = c("public","active")))
+  expect_equal(R62S3lower(R62S3_S3Generic$new(), "HELLO WORLD"), "hello world")
+  expect_error(excluder(R62S3_S3Generic$new()))
+  expect_equal(R62S3StatusA(R62S3_S3Generic$new()), "Printing")
 })

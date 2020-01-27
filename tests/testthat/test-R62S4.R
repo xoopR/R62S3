@@ -2,32 +2,19 @@ library(testthat)
 
 context("R62S4")
 
-nogen <- R6::R6Class("nogen",public = list(printer = function(y) print(y)))
 test_that("no generic",{
-  expect_silent(R62S4(nogen, assignEnvir = .GlobalEnv))
-  expect_true(isGeneric("printer"))
-  expect_true(any(grepl("nogen",methods("printer"))))
-  expect_equal(printer(nogen$new(),"Test No Gen"), "Test No Gen")
+  expect_true(length(methods::.S4methods("R62S4printer")) == 0)
+  expect_silent(R62S4(R62S4_NoGeneric, assignEnvir = topenv(), exclude = "excluder", scope = c("public","active")))
+  expect_equal(R62S4printer(R62S4_NoGeneric$new(), "Hello World"), "Hello World")
+  expect_error(excluder(R62S4_NoGeneric$new()))
+  expect_equal(R62S4StatusC(R62S4_NoGeneric$new()), "Printing")
+  expect_true(length(methods::.S4methods("R62S4printer")) > 0)
 })
 
-gen <- R6::R6Class("gen",public = list(print = function(y) print(y)))
-test_that("generic",{
-  expect_silent(R62S4(gen, assignEnvir = .GlobalEnv))
-  expect_equal(print(gen$new(), "Test Gen"), "Test Gen")
-  expect_true(isGeneric("print"))
-  expect_true(any(grepl("gen",methods("printer"))))
+test_that("S4 generic",{
+  expect_true(length(methods::.S4methods("R62S4upper")) > 0)
+  expect_silent(R62S4(R62S4_S4Generic, assignEnvir = topenv(), exclude = "excluder", scope = c("public","active")))
+  expect_equal(R62S4upper(R62S4_S4Generic$new(), "hello world"), "HELLO WORLD")
+  expect_error(excluder(R62S4_S4Generic$new()))
+  expect_equal(R62S4StatusB(R62S4_S4Generic$new()), "Printing")
 })
-
-masker <- R6::R6Class("masker",public = list(pdf = function() return("Test masker")))
-
-test_that("mask FALSE",{
-  R62S4(masker, mask = FALSE, assignEnvir = .GlobalEnv)
-})
-
-masker <- R6::R6Class("masker",public = list(pdf = function() return("Test masker")))
-
-test_that("mask TRUE",{
-  expect_silent(R62S4(masker, mask = TRUE, assignEnvir = .GlobalEnv))
-  expect_equal(pdf(masker$new()), "Test masker")
-})
-
