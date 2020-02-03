@@ -2,7 +2,6 @@ language: r
 
 os:
  - linux
- - osx
 
 dist: xenial
 
@@ -17,13 +16,14 @@ r_packages:
   - covr
      
 after_success:
+  - Rscript -e 'devtools::install()'
   - Rscript -e 'pkgdown::build_site()'
   - Rscript -e 'library(covr); codecov()'
       
 deploy:
   provider: pages
-  skip_cleanup: true
   token: $GITHUB_PAT
+  skip_cleanup: true
   keep_history: false
   local_dir: docs
   on:
