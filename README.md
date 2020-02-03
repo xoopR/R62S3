@@ -2,13 +2,14 @@
 
 [![Travis Build Status](https://travis-ci.com/RaphaelS1/R62S3.svg?branch=master)](https://travis-ci.com/RaphaelS1/R62S3)
 [![Appveyor Build status](https://ci.appveyor.com/api/projects/status/olstl9l368ofl5el?svg=true)](https://ci.appveyor.com/project/RaphaelS1/r62s3)
-[![Lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)
-[![codecov](https://codecov.io/gh/RaphaelS1/R62S3/branch/master/graph/badge.svg)](https://codecov.io/gh/RaphaelS1/R62S3/branch/master/graph/badge.svg)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![CRAN Version](http://www.r-pkg.org/badges/version-ago/R62S3)](http://www.r-pkg.org/badges/version/R62S3)
-[![CRAN Summary](http://cranlogs.r-pkg.org/badges/grand-total/R62S3)](http://cranlogs.r-pkg.org/badges/grand-total/R62S3)
-[![CRAN Checks](https://cranchecks.info/badges/summary/R62S3)](https://cran.r-project.org/web/checks/check_results_R62S3.html)
+[![codecov](https://codecov.io/gh/RaphaelS1/R62S3/branch/master/graph/badge.svg)](https://codecov.io/gh/RaphaelS1/R62S3)
+[![Lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://img.shields.io/badge/lifecycle-stable-brightgreen)
+[![CRAN Status Badge](https://www.r-pkg.org/badges/version-ago/R62S3)](https://cran.r-project.org/package=R62S3)
+[![CRAN Downloads](https://cranlogs.r-pkg.org/badges/grand-total/R62S3)](https://cran.r-project.org/package=R62S3)
 [![Dependencies](https://tinyverse.netlify.com/badge/R62S3)](https://CRAN.R-project.org/package=R62S3)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CRAN Checks](https://cranchecks.info/badges/summary/R62S3)](https://cran.r-project.org/web/checks/check_results_R62S3.html)
+[![Gitter chat](https://badges.gitter.im/xoopR/community.png)](https://gitter.im/xoopR/community)
 
 ## What is R62S3?
 
