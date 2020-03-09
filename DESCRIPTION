@@ -1,6 +1,6 @@
 Package: R62S3
 Title: Automatic Method Generation from R6
-Version: 1.4.1
+Version: 1.4.2.9000
 Authors@R: person("Raphael", "Sonabend", email = "raphael.sonabend.15@ucl.ac.uk", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-9225-4654"))
 Description: After defining an R6 class, R62S3 is used to automatically generate optional S3/S4 generics and methods for dispatch. Also allows piping for R6 objects.
 Depends:
