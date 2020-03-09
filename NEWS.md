@@ -1,3 +1,7 @@
+# R62S3 1.4.1
+
+* Fixed breakage due to `plot` being moved from `graphics` to `base`
+
 # R62S3 1.4.0
 
 ## Minor Updates

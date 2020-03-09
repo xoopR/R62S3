@@ -11,16 +11,16 @@ test_that("no generic",{
   expect_error(utils::isS3stdGeneric("R62Funprinter"))
 })
 
-plotter <- R6::R6Class("plotter", public = list(plot = function() return("I am plotting")))
+plotter <- R6::R6Class("plotter", public = list(acos = function() return("I am plotting")))
 
 test_that("detect = TRUE, mask = FALSE",{
   expect_silent(R62Fun(plotter, detectGeneric = TRUE, mask = FALSE, assignEnvir = topenv()))
-  expect_equal(plot(plotter$new()), "I am plotting")
-  expect_equal(find("plot"), "package:graphics")
+  expect_equal(acos(plotter$new()), "I am plotting")
+  expect_equal(find("acos"), "package:base")
 })
 
 test_that("detect = FALSE, mask = TRUE",{
   expect_silent(R62Fun(plotter, detectGeneric = FALSE, assignEnvir = topenv(), mask = TRUE))
-  expect_equal(plot(plotter$new()), "I am plotting")
-  expect_equal(names(formals(plot))[[1]], "object")
+  expect_equal(acos(plotter$new()), "I am plotting")
+  expect_equal(names(formals(acos))[[1]], "object")
 })
