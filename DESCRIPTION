@@ -17,5 +17,5 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.0.2
 Roxygen: list(markdown = TRUE)
-URL: https://github.com/RaphaelS1/R62S3/
-BugReports: https://github.com/RaphaelS1/R62S3/issues
+URL: https://xoopR.github.io/R62S3/, https://github.com/xoopR/R62S3
+BugReports: https://github.com/xoopR/R62S3/issues

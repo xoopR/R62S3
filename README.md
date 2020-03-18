@@ -79,7 +79,7 @@ install.packages("R62S3")
 Or the latest stable build from GitHub with
 
 ````R
-remotes::install_github("RaphaelS1/R62S3")
+remotes::install_github("xoopR/R62S3")
 ````
 
 ### Acknowledgements
