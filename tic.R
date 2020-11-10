@@ -9,8 +9,4 @@ get_stage("before_deploy") %>%
   # creates pkgdown site and pushes to gh-pages branch
   # only for the runner with the "BUILD_PKGDOWN" env var set
   do_pkgdown()
-  
-  get_stage("deploy") %>%
-    add_code_step(rmarkdown::render("README.Rmd")) %>%
-    add_step(step_do_push_deploy(commit_paths = c("README.md")))
 }
