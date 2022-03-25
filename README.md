@@ -1,16 +1,13 @@
 # R62S3 <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
 [![CodeFactor](https://www.codefactor.io/repository/github/xoopr/r62s3/badge)](https://www.codefactor.io/repository/github/xoopr/r62s3)
-[![codecov](https://codecov.io/gh/RaphaelS1/R62S3/branch/master/graph/badge.svg)](https://codecov.io/gh/RaphaelS1/R62S3)
+[![codecov](https://codecov.io/gh/XoopR/R62S3/branch/master/graph/badge.svg)](https://codecov.io/gh/XoopR/R62S3)
 [![Lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://img.shields.io/badge/lifecycle-stable-brightgreen)
+[![R62S3 status badge](https://raphaels1.r-universe.dev/badges/R62S3)](https://raphaels1.r-universe.dev)
 
-[![CRAN Checks](https://cranchecks.info/badges/summary/R62S3)](https://cran.r-project.org/web/checks/check_results_R62S3.html)
-[![CRAN Status Badge](https://www.r-pkg.org/badges/version-ago/R62S3)](https://cran.r-project.org/package=R62S3)
 [![CRAN Downloads](https://cranlogs.r-pkg.org/badges/grand-total/R62S3)](https://cran.r-project.org/package=R62S3)
 [![Dependencies](https://tinyverse.netlify.com/badge/R62S3)](https://CRAN.R-project.org/package=R62S3)
-
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Gitter chat](https://badges.gitter.im/xoopR/community.png)](https://gitter.im/xoopR/community)
 
 ## What is R62S3?
 
